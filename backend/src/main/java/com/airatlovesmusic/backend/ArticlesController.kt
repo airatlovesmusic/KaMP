@@ -14,7 +14,6 @@ fun Routing.article() {
 }
 
 private fun getArticles() = (0..5).map {
-    println(it)
     Article(
         id = it,
         title = "Title $it",
