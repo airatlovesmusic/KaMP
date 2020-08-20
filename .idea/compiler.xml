@@ -5,7 +5,10 @@
       <module name="backend" target="1.7" />
       <module name="common" target="1.7" />
       <module name="common-client" target="1.7" />
+      <module name="common-client-jvm" target="1.7" />
+      <module name="common-client-native" target="1.7" />
       <module name="common-jvm" target="1.7" />
+      <module name="common-native" target="1.7" />
       <module name="model" target="1.7" />
     </bytecodeTargetLevel>
   </component>
