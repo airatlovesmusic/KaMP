@@ -2,14 +2,22 @@ package com.airatlovesmusic.backend
 
 import com.airatlovesmusic.model.Article
 import io.ktor.application.call
+import io.ktor.http.*
 import io.ktor.response.respond
-import io.ktor.routing.Routing
-import io.ktor.routing.get
-import io.ktor.routing.route
+import io.ktor.routing.*
 
 fun Routing.article() {
     route("/articles") {
         get { call.respond(getArticles()) }
+    }
+    route("/article") {
+        get {
+            call.request.queryParameters["id"]?.toIntOrNull()?.let { id ->
+                getArticles().firstOrNull { it.id == id }?.let {
+                    call.respond(it)
+                } ?: call.respond(HttpStatusCode.NotFound)
+            } ?: call.respond(HttpStatusCode.BadRequest)
+        }
     }
 }
 
