@@ -10,6 +10,10 @@
       <module name="common-jvm" target="1.7" />
       <module name="common-native" target="1.7" />
       <module name="model" target="1.7" />
+      <module name="model_commonMain" target="1.6" />
+      <module name="model_commonTest" target="1.6" />
+      <module name="model_jvmMain" target="1.6" />
+      <module name="model_jvmTest" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

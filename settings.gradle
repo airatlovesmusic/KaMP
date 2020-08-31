@@ -1,6 +1,0 @@
-include ':common-client-jvm'
-include ':common-client'
-include ':common-jvm'
-include ':model'
-include ':backend'
-rootProject.name = "KaMP"

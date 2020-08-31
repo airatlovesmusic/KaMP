@@ -7,7 +7,7 @@ import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.GsonConverter
 import io.ktor.http.ContentType
-import io.ktor.routing.Routing
+import io.ktor.routing.*
 
 fun Application.module() {
     install(ContentNegotiation) {

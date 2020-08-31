@@ -7,7 +7,7 @@ import io.ktor.response.respond
 import io.ktor.routing.*
 
 fun Routing.article() {
-    route("/articles") {
+    route("/articles", HttpMethod.Get) {
         get { call.respond(getArticles()) }
     }
     route("/article") {
