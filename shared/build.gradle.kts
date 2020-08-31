@@ -28,9 +28,6 @@ kotlin {
 
         }
         val androidMain by getting {
-            dependencies {
-                implementation("com.google.android.material:material:1.2.0")
-            }
         }
         val iosMain by getting {
 
@@ -52,6 +49,7 @@ android {
         }
     }
 }
+
 val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
