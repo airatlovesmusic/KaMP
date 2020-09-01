@@ -24,13 +24,21 @@ kotlin {
         }
     }
     sourceSets {
+        val ktorVersion = "1.4.0"
         val commonMain by getting {
-
+            dependencies {
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+            }
         }
         val androidMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+            }
         }
         val iosMain by getting {
-
+            dependencies {
+                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+            }
         }
     }
 }
