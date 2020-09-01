@@ -19,5 +19,3 @@ include (":backend")
 include (":android:app")
 rootProject.name = "KaMP"
 
-enableFeaturePreview("GRADLE_METADATA")
-
