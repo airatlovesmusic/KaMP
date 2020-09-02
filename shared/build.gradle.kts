@@ -25,9 +25,22 @@ kotlin {
     }
     sourceSets {
         val ktorVersion = "1.4.0"
+        all {
+            languageSettings.apply {
+                useExperimentalAnnotation("kotlin.ExperimentalStdlibApi")
+                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                useExperimentalAnnotation("kotlinx.coroutines.FlowPreview")
+                useExperimentalAnnotation("kotlinx.coroutines.InternalCoroutinesApi")
+                useExperimentalAnnotation("kotlinx.serialization.UnstableDefault")
+            }
+        }
         val commonMain by getting {
             dependencies {
+                implementation(project(":model"))
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.20.0")
             }
         }
         val androidMain by getting {
