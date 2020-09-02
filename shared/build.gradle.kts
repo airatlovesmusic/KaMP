@@ -13,6 +13,7 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven(url = "https://dl.bintray.com/icerockdev/moko")
 }
 kotlin {
     android()
@@ -41,6 +42,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.20.0")
+                implementation("dev.icerock.moko:mvvm:0.7.1")
             }
         }
         val androidMain by getting {
