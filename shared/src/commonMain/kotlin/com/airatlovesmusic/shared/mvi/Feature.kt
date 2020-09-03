@@ -10,8 +10,8 @@ open class Feature<out State, Cmd, Msg: Any, out News> (
     private val initialMessages: Set<Msg> = setOf(),
     private val reducer: (Msg, State) -> Update<State, Cmd>,
     private val commandHandler: suspend CoroutineScope.(Cmd) -> Flow<SideEffect<Msg, News>>,
-    private val ioDispatcher: CoroutineDispatcher,
-    mainDispatcher: CoroutineDispatcher,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    mainDispatcher: CoroutineDispatcher = Dispatchers.Default,
     bootstrapper: Set<Flow<Msg>> = setOf(),
     stateListener: (State) -> Unit,
     newsListener: (News) -> Unit
