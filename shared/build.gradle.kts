@@ -48,6 +48,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
+                implementation("androidx.core:core-ktx:1.3.1")
+                implementation("androidx.appcompat:appcompat:1.2.0")
             }
         }
         val iosMain by getting {
