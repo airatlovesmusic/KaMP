@@ -3,10 +3,8 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("kotlin-android-extensions")
+    kotlin("plugin.serialization") version "1.3.72"
 }
-group = "com.jetbrains"
-version = "1.0-SNAPSHOT"
 
 repositories {
     gradlePluginPortal()
@@ -15,7 +13,17 @@ repositories {
     mavenCentral()
     maven(url = "https://dl.bintray.com/icerockdev/moko")
 }
+
 kotlin {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {
+        JavaVersion.VERSION_1_8.toString().also {
+            kotlinOptions.jvmTarget = it
+            if (plugins.hasPlugin("org.jetbrains.kotlin.jvm")) {
+                sourceCompatibility = it
+                targetCompatibility = it
+            }
+        }
+    }
     android()
     ios {
         binaries {
@@ -28,31 +36,32 @@ kotlin {
         val ktorVersion = "1.4.0"
         all {
             languageSettings.apply {
+                useExperimentalAnnotation("kotlin.RequiresOptIn")
                 useExperimentalAnnotation("kotlin.ExperimentalStdlibApi")
                 useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
                 useExperimentalAnnotation("kotlinx.coroutines.FlowPreview")
                 useExperimentalAnnotation("kotlinx.coroutines.InternalCoroutinesApi")
-                useExperimentalAnnotation("kotlinx.serialization.UnstableDefault")
             }
         }
         val commonMain by getting {
             dependencies {
-                implementation(project(":model"))
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.20.0")
+                implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
                 implementation("dev.icerock.moko:mvvm:0.7.1")
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
+                implementation(kotlin("stdlib"))
+                implementation("io.ktor:ktor-client-android:1.4.0")
                 implementation("androidx.core:core-ktx:1.3.1")
                 implementation("androidx.appcompat:appcompat:1.2.0")
             }
         }
         val iosMain by getting {
+            dependsOn(commonMain)
             dependencies {
                 implementation("io.ktor:ktor-client-ios:$ktorVersion")
             }

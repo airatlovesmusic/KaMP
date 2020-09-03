@@ -1,6 +1,6 @@
 package com.airatlovesmusic.model
 
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 
 @Serializable
 data class Article(

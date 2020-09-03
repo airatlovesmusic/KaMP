@@ -1,9 +1,10 @@
 plugins {
     kotlin("multiplatform")
-    id("kotlinx-serialization")
+    kotlin("plugin.serialization") version "1.3.72"
 }
 
 repositories {
+    gradlePluginPortal()
     google()
     jcenter()
     mavenCentral()
@@ -21,7 +22,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.20.0")
+                implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
             }
         }
         all {

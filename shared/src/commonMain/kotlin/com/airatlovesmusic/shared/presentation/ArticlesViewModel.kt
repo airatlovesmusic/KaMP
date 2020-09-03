@@ -1,14 +1,17 @@
 package com.airatlovesmusic.shared.presentation
 
-import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.data.network.ApiClient
 import com.airatlovesmusic.shared.data.repository.ArticlesRepository
+import com.airatlovesmusic.shared.entity.Article
+import com.airatlovesmusic.shared.router.Router
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class ArticlesViewModel: ViewModel() {
+class ArticlesViewModel(
+    private val router: Router
+): ViewModel() {
 
     private val apiClient = ApiClient()
     private val articlesRepository = ArticlesRepository(apiClient)
