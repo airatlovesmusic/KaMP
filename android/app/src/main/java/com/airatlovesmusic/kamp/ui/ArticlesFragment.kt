@@ -7,21 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.airatlovesmusic.kamp.R
 import com.airatlovesmusic.shared.base.BaseFlowFragment
+import com.airatlovesmusic.shared.base.BaseFragment
 import com.airatlovesmusic.shared.presentation.ArticlesViewModel
 
-class ArticlesFragment: Fragment() {
+class ArticlesFragment: BaseFragment() {
 
-    private val viewModel by lazy {
-        ArticlesViewModel((parentFragment as BaseFlowFragment).router)
-    }
+    override val layoutRes: Int
+        get() = R.layout.activity_main
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.activity_main, container, false)
-    }
+    private val viewModel by lazy { ArticlesViewModel(router) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
