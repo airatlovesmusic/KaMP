@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.airatlovesmusic.kamp.R
 import com.airatlovesmusic.shared.base.BaseFlowFragment
 import com.airatlovesmusic.shared.base.BaseFragment
+import com.airatlovesmusic.shared.observe
 import com.airatlovesmusic.shared.presentation.ArticlesViewModel
 
 class ArticlesFragment: BaseFragment() {
@@ -19,13 +20,13 @@ class ArticlesFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.articles.addObserver {
+        viewModel.articles.observe {
             println("list " + it)
         }
-        viewModel.isLoading.addObserver {
+        viewModel.isLoading.observe {
             println("isLoading " + it)
         }
-        viewModel.errorMessage.addObserver {
+        viewModel.errorMessage.observe {
             println("error " + it)
         }
     }
