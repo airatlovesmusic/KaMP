@@ -1,8 +1,6 @@
 package com.airatlovesmusic.shared
 
-import dev.icerock.moko.mvvm.UI
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Runnable
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
