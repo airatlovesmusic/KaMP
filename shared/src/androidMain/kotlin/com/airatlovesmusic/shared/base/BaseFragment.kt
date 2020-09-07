@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.airatlovesmusic.shared.router.Router
+import org.koin.core.KoinComponent
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), KoinComponent {
 
     abstract val layoutRes: Int
 

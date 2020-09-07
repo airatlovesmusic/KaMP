@@ -49,7 +49,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
-                implementation("org.koin:koin-core:3.0.0-alpha-2")
+                api("org.koin:koin-core:3.0.0-alpha-2")
             }
         }
         val androidMain by getting {
@@ -58,6 +58,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-android:1.4.0")
                 implementation("androidx.core:core-ktx:1.3.1")
                 implementation("androidx.appcompat:appcompat:1.2.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
             }
         }
         val iosMain by getting {

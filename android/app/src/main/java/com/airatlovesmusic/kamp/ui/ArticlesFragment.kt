@@ -1,39 +1,30 @@
 package com.airatlovesmusic.kamp.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.airatlovesmusic.kamp.R
-import com.airatlovesmusic.shared.base.BaseFlowFragment
 import com.airatlovesmusic.shared.base.BaseFragment
-import com.airatlovesmusic.shared.observe
-import com.airatlovesmusic.shared.presentation.ArticlesViewModel
+import com.airatlovesmusic.shared.presentation.ArticlesFeature
+import com.airatlovesmusic.shared.presentation.News
+import com.airatlovesmusic.shared.presentation.State
+import org.koin.core.get
 
 class ArticlesFragment: BaseFragment() {
 
     override val layoutRes: Int
         get() = R.layout.activity_main
 
-    private val viewModel by lazy { ArticlesViewModel(router) }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.articles.observe {
-            println("list " + it)
-        }
-        viewModel.isLoading.observe {
-            println("isLoading " + it)
-        }
-        viewModel.errorMessage.observe {
-            println("error " + it)
-        }
-    }
+    private val feature = ArticlesFeature(get(), ::renderState, ::handleNews)
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.onCleared()
+        feature.dispose()
+    }
+
+    private fun handleNews(news: News) {
+        println("news - $news")
+    }
+
+    private fun renderState(state: State) {
+        println("state - $state")
     }
 
 }
