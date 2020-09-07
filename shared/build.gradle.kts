@@ -1,10 +1,11 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    kotlin("plugin.serialization") version "1.3.72"
+    kotlin("plugin.serialization")
+    kotlin("native.cocoapods")
 }
+
+version = "1.0"
 
 repositories {
     gradlePluginPortal()
@@ -25,13 +26,13 @@ kotlin {
         }
     }
     android()
-    ios {
-        binaries {
-            framework {
-                baseName = "shared"
-            }
-        }
+    ios()
+    cocoapods {
+        summary = "Kotlin sample project with CocoaPods dependencies"
+        homepage = "https://github.com/Kotlin/kotlin-with-cocoapods-sample"
+        podfile = project.file("../ios/Podfile")
     }
+
     sourceSets {
         val ktorVersion = "1.4.0"
         all {
@@ -49,7 +50,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
-                implementation("dev.icerock.moko:mvvm:0.7.1")
+                implementation("dev.icerock.moko:mvvm:0.8.0")
             }
         }
         val androidMain by getting {
@@ -68,6 +69,7 @@ kotlin {
         }
     }
 }
+
 android {
     compileSdkVersion(29)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -83,17 +85,3 @@ android {
         }
     }
 }
-
-val packForXcode by tasks.creating(Sync::class) {
-    group = "build"
-    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
-    val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
-    inputs.property("mode", mode)
-    dependsOn(framework.linkTask)
-    val targetDir = File(buildDir, "xcode-frameworks")
-    from({ framework.outputDirectory })
-    into(targetDir)
-}
-tasks.getByName("build").dependsOn(packForXcode)
