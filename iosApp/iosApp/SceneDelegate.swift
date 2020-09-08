@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  iosApp
 //
-//  Created by Айрат Халилов on 07.09.2020.
+//  Created by Айрат Халилов on 08.09.2020.
 //  Copyright © 2020 Айрат Халилов. All rights reserved.
 //
 

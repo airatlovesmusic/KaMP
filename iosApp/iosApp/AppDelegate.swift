@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  iosApp
 //
-//  Created by Айрат Халилов on 07.09.2020.
+//  Created by Айрат Халилов on 08.09.2020.
 //  Copyright © 2020 Айрат Халилов. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        KoinKt.doInitKoin()
         return true
     }
 
