@@ -1,7 +1,7 @@
 package com.airatlovesmusic.shared.data.network
 
+import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.Constants
-import com.airatlovesmusic.shared.entity.Article
 import io.ktor.client.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*

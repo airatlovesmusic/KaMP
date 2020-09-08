@@ -1,7 +1,7 @@
 package com.airatlovesmusic.shared.presentation
 
+import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.data.repository.ArticlesRepository
-import com.airatlovesmusic.shared.entity.Article
 import com.airatlovesmusic.shared.mvi.Feature
 import com.airatlovesmusic.shared.mvi.SideEffect
 import com.airatlovesmusic.shared.mvi.Update
