@@ -1,19 +1,19 @@
 package com.airatlovesmusic.shared.mvi
 
 import com.airatlovesmusic.shared.ApplicationDispatcher
+import com.airatlovesmusic.shared.MainDispatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
-import kotlin.coroutines.CoroutineContext
 
 open class Feature<out State, Cmd, Msg: Any, out News> (
     initialState: State,
     private val initialMessages: Set<Msg> = setOf(),
     private val reducer: (Msg, State) -> Update<State, Cmd>,
     private val commandHandler: suspend FlowCollector<SideEffect<Msg, News>>.(Cmd) -> Unit,
-    private val ioDispatcher: CoroutineContext = ApplicationDispatcher,
-    mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
+    private val ioDispatcher: CoroutineDispatcher = ApplicationDispatcher,
+    mainDispatcher: CoroutineDispatcher = MainDispatcher,
     bootstrapper: Set<Flow<Msg>> = setOf(),
     stateListener: (State) -> Unit,
     newsListener: (News) -> Unit
@@ -49,9 +49,6 @@ open class Feature<out State, Cmd, Msg: Any, out News> (
 
     private fun initCmdHandler() {
         coroutineScope.launch(ioDispatcher) {
-            flow<String> {
-                emit("re")
-            }
             commandChannel.asFlow()
                 .onStart { initMsgHandler() }
                 .collect { cmd ->

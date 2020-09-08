@@ -18,10 +18,13 @@ struct ContentView: View {
     let feature: ArticlesFeature = ArticlesFeature(
         articlesRepository: ArticlesRepository(apiClient: ApiClient()),
         stateListener: { (state) in
-            print(state.isLoading ? "true" : "false")
+            print(state.description())
         },
         newsListener: { (news: News) in
-            print(news.description)
+            switch (news) {
+                case let news as News.GetArticlesFailure: print("failure")
+                default: print("default")
+            }
         }
     )
     

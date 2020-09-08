@@ -1,5 +1,6 @@
 package com.airatlovesmusic.shared
 
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.CoroutineDispatcher
 
-internal expect val ApplicationDispatcher: CoroutineContext
+internal expect val ApplicationDispatcher: CoroutineDispatcher
+internal expect val MainDispatcher: CoroutineDispatcher
