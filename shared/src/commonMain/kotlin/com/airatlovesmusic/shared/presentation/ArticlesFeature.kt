@@ -5,7 +5,6 @@ import com.airatlovesmusic.shared.entity.Article
 import com.airatlovesmusic.shared.mvi.Feature
 import com.airatlovesmusic.shared.mvi.SideEffect
 import com.airatlovesmusic.shared.mvi.Update
-import kotlinx.coroutines.flow.flow
 
 data class State(
     val articles: List<Article>? = null,
@@ -14,6 +13,7 @@ data class State(
 
 sealed class Msg {
     object GetArticles: Msg()
+    // Effects
     data class NewArticles(val list: List<Article>): Msg()
     object GetArticlesFailure: Msg()
 }
@@ -42,13 +42,12 @@ class ArticlesFeature(
     },
     commandHandler = { cmd: Cmd ->
         when (cmd) {
-            is Cmd.GetArticles -> flow {
+            is Cmd.GetArticles ->
                 runCatching { articlesRepository.getArticles() }
                     .fold(
                         { SideEffect.msg<Msg, News>(Msg.NewArticles(it)) },
                         { SideEffect(msg = Msg.GetArticlesFailure, news = News.GetArticlesFailure) }
                     ).also { emit(it) }
-            }
         }
     },
     stateListener = stateListener,

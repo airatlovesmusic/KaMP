@@ -1,12 +1,13 @@
 //
 //  AppDelegate.swift
-//  app
+//  iosApp
 //
-//  Created by Айрат Халилов on 31.08.2020.
+//  Created by Айрат Халилов on 07.09.2020.
 //  Copyright © 2020 Айрат Халилов. All rights reserved.
 //
 
 import UIKit
+import shared
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

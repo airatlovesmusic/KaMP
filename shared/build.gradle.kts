@@ -29,7 +29,6 @@ kotlin {
     cocoapods {
         summary = "Kotlin sample project with CocoaPods dependencies"
         homepage = "https://github.com/Kotlin/kotlin-with-cocoapods-sample"
-        podfile = project.file("../ios/Podfile")
     }
 
     sourceSets {

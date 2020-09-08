@@ -11,7 +11,7 @@ open class Feature<out State, Cmd, Msg: Any, out News> (
     initialState: State,
     private val initialMessages: Set<Msg> = setOf(),
     private val reducer: (Msg, State) -> Update<State, Cmd>,
-    private val commandHandler: suspend CoroutineScope.(Cmd) -> Flow<SideEffect<Msg, News>>,
+    private val commandHandler: suspend FlowCollector<SideEffect<Msg, News>>.(Cmd) -> Unit,
     private val ioDispatcher: CoroutineContext = ApplicationDispatcher,
     mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
     bootstrapper: Set<Flow<Msg>> = setOf(),
@@ -49,10 +49,17 @@ open class Feature<out State, Cmd, Msg: Any, out News> (
 
     private fun initCmdHandler() {
         coroutineScope.launch(ioDispatcher) {
+            flow<String> {
+                emit("re")
+            }
             commandChannel.asFlow()
                 .onStart { initMsgHandler() }
                 .collect { cmd ->
-                    commandHandler.invoke(coroutineScope, cmd).collect { (msg, news) ->
+                    object: AbstractFlow<SideEffect<Msg, News>>() {
+                        override suspend fun collectSafely(
+                            collector: FlowCollector<SideEffect<Msg, News>>
+                        ) { collector.commandHandler(cmd) }
+                    }.collect { (msg, news) ->
                         msgChannel.waitingOffer(this, msg)
                         newsChannel.waitingOffer(this, news)
                     }
