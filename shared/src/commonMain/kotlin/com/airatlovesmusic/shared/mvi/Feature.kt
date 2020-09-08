@@ -14,7 +14,6 @@ open class Feature<out State, Cmd, Msg: Any, out News> (
     private val commandHandler: suspend FlowCollector<SideEffect<Msg, News>>.(Cmd) -> Unit,
     private val ioDispatcher: CoroutineDispatcher = ApplicationDispatcher,
     mainDispatcher: CoroutineDispatcher = MainDispatcher,
-    bootstrapper: Set<Flow<Msg>> = setOf(),
     stateListener: (State) -> Unit,
     newsListener: (News) -> Unit
 ) {
@@ -30,18 +29,11 @@ open class Feature<out State, Cmd, Msg: Any, out News> (
     init {
         stateChannel.offer(initialState)
         initCmdHandler()
-        bootstrapper.forEach {
-            coroutineScope.launch() {
-                it.collect {
-                    accept(it)
-                }
-            }
-        }
-        coroutineScope.launch {
+        coroutineScope.launch(ioDispatcher) {
             stateChannel.asFlow()
                 .collect { stateListener.invoke(it) }
         }
-        coroutineScope.launch {
+        coroutineScope.launch(ioDispatcher) {
             newsChannel.asFlow()
                 .collect { newsListener.invoke(it) }
         }

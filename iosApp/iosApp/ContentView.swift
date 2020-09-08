@@ -11,22 +11,23 @@ import shared
 
 struct ContentView: View {
     
+    let feature: ArticlesFeatureComponent =
+        ArticlesFeatureComponent(
+            stateListener: { (state: ArticlesFeatureComponent.State) in
+                print("state - " + state.description())
+            },
+            newsListener: { (news: ArticlesFeatureComponent.News) in
+                switch (news) {
+                    case let failure as ArticlesFeatureComponent.NewsGetArticlesFailure: print(failure.error)
+                    default: print("news - " + news.description)
+                }
+            }
+        )
+    
     var body: some View {
         Text("Hello")
     }
-    
-    let feature: ArticlesFeature = ArticlesFeature(
-        articlesRepository: ArticlesRepository(apiClient: ApiClient()),
-        stateListener: { (state) in
-            print(state.description())
-        },
-        newsListener: { (news: News) in
-            switch (news) {
-                case let news as News.GetArticlesFailure: print("failure")
-                default: print("default")
-            }
-        }
-    )
+
     
 }
 

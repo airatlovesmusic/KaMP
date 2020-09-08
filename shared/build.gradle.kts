@@ -47,7 +47,7 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt")
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
                 api("org.koin:koin-core:3.0.1-alpha-2")
                 api(project(":model"))

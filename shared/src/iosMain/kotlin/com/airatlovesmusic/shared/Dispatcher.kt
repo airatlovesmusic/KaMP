@@ -5,11 +5,10 @@ import platform.darwin.*
 import kotlin.coroutines.CoroutineContext
 
 internal actual val ApplicationDispatcher: CoroutineDispatcher =
-    NsQueueDispatcher(
-        dispatch_get_main_queue()
-    )
+    UIDispatcher()
 
-internal actual val MainDispatcher: CoroutineDispatcher = UIDispatcher()
+internal actual val MainDispatcher: CoroutineDispatcher =
+    UIDispatcher()
 
 internal class NsQueueDispatcher(
     private val dispatchQueue: dispatch_queue_t
