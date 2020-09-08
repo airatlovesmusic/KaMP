@@ -31,7 +31,7 @@ class ArticlesFeature(
     stateListener: (State) -> Unit,
     newsListener: (News) -> Unit
 ): Feature<State, Cmd, Msg, News>(
-    State(),
+    initialState = State(),
     initialMessages = setOf(Msg.GetArticles),
     reducer = { msg, state ->
         when (msg) {
