@@ -8,9 +8,10 @@ actual open class Router constructor(
 ) {
 
     actual open fun goTo(screen: Screen) {
+        val fragment = screen.getFragment()
         fragmentManager.beginTransaction()
-            .replace(containerId, screen.getFragment())
-            .addToBackStack(screen.getFragment().hashCode().toString())
+            .replace(containerId, fragment)
+            .addToBackStack(fragment.hashCode().toString())
             .commit()
     }
 

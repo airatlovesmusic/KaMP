@@ -11,6 +11,8 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
+    maven(url = "https://dl.bintray.com/badoo/maven")
 }
 
 kotlin {
@@ -33,7 +35,6 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "1.4.0"
         all {
             languageSettings.apply {
                 useExperimentalAnnotation("kotlin.RequiresOptIn")
@@ -45,10 +46,9 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-logging:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt")
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+                implementation("com.badoo.reaktive:reaktive:1.1.17")
+                implementation("com.badoo.reaktive:utils:1.1.17")
                 api("org.koin:koin-core:3.0.1-alpha-2")
                 api(project(":model"))
             }
@@ -56,7 +56,6 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation("io.ktor:ktor-client-android:1.4.0")
                 implementation("androidx.core:core-ktx:1.3.1")
                 implementation("androidx.appcompat:appcompat:1.2.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
@@ -64,9 +63,6 @@ kotlin {
         }
         val iosMain by getting {
             dependsOn(commonMain)
-            dependencies {
-                implementation("io.ktor:ktor-client-ios:$ktorVersion")
-            }
         }
     }
 }

@@ -1,106 +1,58 @@
 package com.airatlovesmusic.shared.mvi
 
-import com.airatlovesmusic.shared.ApplicationDispatcher
-import com.airatlovesmusic.shared.MainDispatcher
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import com.badoo.reaktive.base.CompleteCallback
+import com.badoo.reaktive.completable.Completable
+import com.badoo.reaktive.disposable.CompositeDisposable
+import com.badoo.reaktive.disposable.plusAssign
+import com.badoo.reaktive.disposable.scope.DisposableScope
+import com.badoo.reaktive.observable.*
+import com.badoo.reaktive.scheduler.mainScheduler
+import com.badoo.reaktive.subject.behavior.BehaviorSubject
+import com.badoo.reaktive.subject.publish.PublishSubject
+import com.badoo.reaktive.utils.ensureNeverFrozen
 
-open class Feature<out State, Cmd, Msg: Any, out News> (
+class Feature<out State, Cmd, Msg: Any, out News> (
     initialState: State,
-    private val initialMessages: Set<Msg> = setOf(),
+    initialMessages: Set<Msg> = setOf(),
     private val reducer: (Msg, State) -> Update<State, Cmd>,
-    private val commandHandler: suspend FlowCollector<SideEffect<Msg, News>>.(Cmd) -> Unit,
-    private val ioDispatcher: CoroutineDispatcher = ApplicationDispatcher,
-    mainDispatcher: CoroutineDispatcher = MainDispatcher,
+    private val commandHandler: (Cmd) -> Observable<SideEffect<Msg, News>>,
     stateListener: (State) -> Unit,
     newsListener: (News) -> Unit
-) {
+): DisposableScope by DisposableScope() {
 
-    private val job = SupervisorJob()
-    private val coroutineScope = CoroutineScope(mainDispatcher + job)
-
-    private val stateChannel = BroadcastChannel<State>(Channel.CONFLATED)
-    private val msgChannel= BroadcastChannel<Msg>(Channel.BUFFERED)
-    private val commandChannel = BroadcastChannel<Cmd>(Channel.BUFFERED)
-    private val newsChannel = BroadcastChannel<News>(Channel.BUFFERED)
+    private val stateSubject = BehaviorSubject(initialState).ensureNeverFrozen().scope(CompleteCallback::onComplete)
+    private val newsSubject = PublishSubject<News>().scope(CompleteCallback::onComplete)
+    private val msgSubject = PublishSubject<Msg>().scope(CompleteCallback::onComplete)
+    private val cmdSubject = PublishSubject<Cmd>().scope(CompleteCallback::onComplete)
 
     init {
-        stateChannel.offer(initialState)
-        initCmdHandler()
-        coroutineScope.launch(ioDispatcher) {
-            stateChannel.asFlow()
-                .collect { stateListener.invoke(it) }
-        }
-        coroutineScope.launch(ioDispatcher) {
-            newsChannel.asFlow()
-                .collect { newsListener.invoke(it) }
-        }
-    }
-
-    private fun initCmdHandler() {
-        coroutineScope.launch(ioDispatcher) {
-            commandChannel.asFlow()
-                .onStart { initMsgHandler() }
-                .collect { cmd ->
-                    object: AbstractFlow<SideEffect<Msg, News>>() {
-                        override suspend fun collectSafely(
-                            collector: FlowCollector<SideEffect<Msg, News>>
-                        ) { collector.commandHandler(cmd) }
-                    }.collect { (msg, news) ->
-                        msgChannel.waitingOffer(this, msg)
-                        newsChannel.waitingOffer(this, news)
+        cmdSubject.subscribe { cmd ->
+            commandHandler.invoke(cmd)
+                .observeOn(mainScheduler)
+                .subscribeScoped(
+                    isThreadLocal = true,
+                    onNext = { (msg, news) ->
+                        if (msg != null) msgSubject.onNext(msg)
+                        if (news != null) newsSubject.onNext(news)
                     }
+                )
+        }
+        stateSubject.subscribe { stateListener.invoke(it) }
+        newsSubject.subscribe { newsListener.invoke(it) }
+        msgSubject
+            .subscribeScoped(
+                isThreadLocal = true,
+                onNext = { msg ->
+                    val (state, cmd) = reducer.invoke(msg, stateSubject.value)
+                    if (state != null) stateSubject.onNext(state)
+                    if (cmd != null) cmdSubject.onNext(cmd)
                 }
-        }
-    }
-
-    private fun initMsgHandler() {
-        coroutineScope.launch(ioDispatcher) {
-            flow {
-                initialMessages.forEach { emit(it) }
-                emitAll(msgChannel.asFlow())
-            }.collect { msg ->
-                val (state, cmd) = reducer.invoke(msg, stateChannel.asFlow().first())
-                stateChannel.waitingOffer(this, state)
-                commandChannel.waitingOffer(this, cmd)
-            }
-        }
+            )
+        initialMessages.forEach { msgSubject.onNext(it) }
     }
 
     fun accept(msg: Any) {
-        msgChannel.waitingOffer(coroutineScope, msg as? Msg)
+        msgSubject.onNext(msg as Msg)
     }
 
-    open fun dispose() {
-        job.complete()
-        newsChannel.close()
-        msgChannel.close()
-        commandChannel.close()
-    }
-
-}
-
-fun <T> BroadcastChannel<T>.safeOffer(item: T?) {
-    item?.let {
-        if (!isClosedForSend) offer(it)
-    }
-}
-
-fun <T> BroadcastChannel<T>.waitingOffer(
-    coroutineScope: CoroutineScope,
-    item: T?,
-    cancellationTime: Long = 500L
-) {
-    coroutineScope.launch {
-        var delayTime = 0L
-        while (isClosedForSend) {
-            delay(50)
-            delayTime+=50L
-            if (delayTime == cancellationTime) cancel()
-        }
-    }.invokeOnCompletion {
-        safeOffer(item)
-    }
 }

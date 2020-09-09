@@ -5,8 +5,20 @@ import com.airatlovesmusic.shared.data.repository.ArticlesRepository
 import com.airatlovesmusic.shared.mvi.Feature
 import com.airatlovesmusic.shared.mvi.SideEffect
 import com.airatlovesmusic.shared.mvi.Update
+import com.badoo.reaktive.maybe.asObservable
+import com.badoo.reaktive.maybe.map
+import com.badoo.reaktive.maybe.observeOn
+import com.badoo.reaktive.maybe.onErrorReturn
+import com.badoo.reaktive.observable.defaultIfEmpty
+import com.badoo.reaktive.observable.startWithValue
+import com.badoo.reaktive.observable.toObservable
+import com.badoo.reaktive.scheduler.mainScheduler
+import com.badoo.reaktive.single.asObservable
+import com.badoo.reaktive.single.map
+import com.badoo.reaktive.single.onErrorReturn
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import kotlin.contracts.Effect
 
 class ArticlesFeatureComponent(
     stateListener: (State) -> Unit,
@@ -28,11 +40,10 @@ class ArticlesFeatureComponent(
         commandHandler = { cmd: Cmd ->
             when (cmd) {
                 is Cmd.GetArticles ->
-                    runCatching { articlesRepository.getArticles() }
-                        .fold(
-                            { SideEffect.msg<Msg, News>(Msg.NewArticles(it)) },
-                            { SideEffect(msg = Msg.GetArticlesFailure, news = News.GetArticlesFailure(it.message ?: "error")) }
-                        ).also { emit(it) }
+                    articlesRepository.getArticles()
+                        .map { SideEffect.msg<Msg, News>(Msg.NewArticles(it)) }
+                        .onErrorReturn { SideEffect(msg = Msg.GetArticlesFailure, news = News.GetArticlesFailure("error")) }
+                        .asObservable()
             }
         },
         stateListener = stateListener,
