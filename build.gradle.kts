@@ -18,7 +18,6 @@ allprojects {
         google()
         mavenCentral()
         jcenter()
-        maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
     }
 }
 
