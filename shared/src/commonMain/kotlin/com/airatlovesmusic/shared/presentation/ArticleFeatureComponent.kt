@@ -61,6 +61,10 @@ class ArticleFeatureComponent(
         data class GetArticleFailure(val throwable: Throwable): News()
     }
 
+    fun dispatch(msg: Msg) {
+        feature.accept(msg)
+    }
+
     fun dispose() {
         feature.dispose()
     }
