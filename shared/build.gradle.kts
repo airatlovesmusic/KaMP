@@ -12,6 +12,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
+    maven(url = "https://dl.bintray.com/badoo/maven")
 }
 
 kotlin {
@@ -50,6 +51,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt")
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+                implementation("com.badoo.reaktive:reaktive:1.1.16")
                 api("org.koin:koin-core:3.0.1-alpha-2")
                 api(project(":model"))
             }
