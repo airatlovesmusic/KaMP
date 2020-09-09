@@ -1,6 +1,6 @@
 package com.airatlovesmusic.shared
 
-import com.airatlovesmusic.shared.data.network.ApiClient
+import com.airatlovesmusic.shared.data.network.networkSource
 import com.airatlovesmusic.shared.data.repository.ArticlesRepository
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -14,6 +14,6 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 fun initKoin() = initKoin {}
 
 val multiPlatformModule = module {
-    single { ApiClient() }
+    single { networkSource() }
     single { ArticlesRepository(get()) }
 }
