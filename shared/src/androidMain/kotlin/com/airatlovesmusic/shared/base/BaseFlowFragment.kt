@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.airatlovesmusic.android.R
+import com.airatlovesmusic.shared.R
 import com.airatlovesmusic.shared.router.Router
 import com.airatlovesmusic.shared.router.Screen
 

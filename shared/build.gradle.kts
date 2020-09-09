@@ -58,7 +58,6 @@ kotlin {
                 implementation(kotlin("stdlib"))
                 implementation("androidx.core:core-ktx:1.3.1")
                 implementation("androidx.appcompat:appcompat:1.2.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
             }
         }
         val iosMain by getting {
@@ -69,7 +68,6 @@ kotlin {
 
 android {
     compileSdkVersion(29)
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdkVersion(24)
         targetSdkVersion(29)
