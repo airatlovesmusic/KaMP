@@ -9,21 +9,6 @@
 import UIKit
 import shared
 
-class ArticlesScreen: Screen {
-    override func getViewController() -> UIViewController {
-        return ArticlesViewController()
-    }
-}
-
-class ScreensImpl: Screens {
-    func articles() -> Screen {
-        return ArticlesScreen()
-    }
-    func article(url: String) -> Screen {
-        return ArticlesScreen()
-    }
-}
-
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -41,10 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func launchMainScreen() {
         guard let window = UIApplication.shared.keyWindow else { return }
-        let controller = ArticlesViewController()
+        let controller = UINavigationController(rootViewController: ArticlesViewController())
         window.rootViewController = controller
     }
-
-
 }
 
