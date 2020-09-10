@@ -26,7 +26,7 @@ internal class NetworkSourceImpl: NetworkSource {
                 .inputStream
                 .bufferedReader()
                 .use(BufferedReader::readText)
-                .let { println(it); Json.decodeFromString(ListSerializer(Article.serializer()), it) }
+                .let { Json.decodeFromString(ListSerializer(Article.serializer()), it) }
         }
         .subscribeOn(ioScheduler)
 
