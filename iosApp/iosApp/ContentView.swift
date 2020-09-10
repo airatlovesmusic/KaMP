@@ -21,7 +21,8 @@ struct ContentView: View {
                     case let failure as ArticlesFeatureComponent.NewsGetArticlesFailure: print(failure.error)
                     default: print("news - " + news.description)
                 }
-            }
+            },
+            router: nil
         )
     
     var body: some View {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="backend" target="1.7" />
       <module name="common" target="1.7" />
       <module name="common-client" target="1.7" />
@@ -9,6 +9,10 @@
       <module name="common-client-native" target="1.7" />
       <module name="common-jvm" target="1.7" />
       <module name="common-native" target="1.7" />
+      <module name="KaMP.model.commonMain" target="1.6" />
+      <module name="KaMP.model.commonTest" target="1.6" />
+      <module name="KaMP.model.jvmMain" target="1.6" />
+      <module name="KaMP.model.jvmTest" target="1.6" />
       <module name="model" target="1.7" />
       <module name="model_commonMain" target="1.6" />
       <module name="model_commonTest" target="1.6" />
