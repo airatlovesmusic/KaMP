@@ -3,6 +3,7 @@ package com.airatlovesmusic.kamp.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.airatlovesmusic.kamp.R
+import com.airatlovesmusic.shared.initKoin
 
 class AppActivity: AppCompatActivity() {
 
