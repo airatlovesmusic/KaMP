@@ -8,8 +8,11 @@ abstract class BaseFragment(
     layoutRes: Int
 ) : Fragment(layoutRes), KoinComponent {
 
-    protected val router: Router by lazy {
-        (parentFragment as BaseFlowFragment).router
+    protected val parentRouter: Router by lazy {
+        when (val parentFragment = parentFragment) {
+            is BaseFlowFragment -> parentFragment.router
+            else -> (activity as BaseActivity).router
+        }
     }
 
     open fun onBackPressed() {}

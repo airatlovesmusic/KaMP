@@ -1,10 +1,14 @@
 package com.airatlovesmusic.kamp.ui
 
-import com.airatlovesmusic.kamp.Screens
 import com.airatlovesmusic.shared.base.BaseFlowFragment
+import com.airatlovesmusic.shared.router.Screens
+import org.koin.core.inject
 
 class MainFragment : BaseFlowFragment() {
 
-    override val launchScreen = Screens.Articles
+    private val screens by inject<Screens>()
+
+    override val launchScreen =
+        screens.articles()
 
 }

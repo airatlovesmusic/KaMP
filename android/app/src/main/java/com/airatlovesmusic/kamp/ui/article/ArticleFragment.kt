@@ -21,12 +21,21 @@ class ArticleFragment: BaseFragment(R.layout.fragment_article) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentArticleBinding.bind(view)
-        featureComponent = ArticleFeatureComponent(url, ::renderState, ::renderNews)
+        featureComponent = ArticleFeatureComponent(
+            url = url,
+            stateListener = ::renderState,
+            newsListener = ::renderNews,
+            router = parentRouter
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    override fun onBackPressed() {
+        parentRouter.goBack()
     }
 
     private fun renderNews(news: News) {

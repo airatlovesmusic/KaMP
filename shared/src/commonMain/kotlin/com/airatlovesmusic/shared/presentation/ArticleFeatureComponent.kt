@@ -5,6 +5,7 @@ import com.airatlovesmusic.shared.data.repository.ArticlesRepository
 import com.airatlovesmusic.shared.mvi.Feature
 import com.airatlovesmusic.shared.mvi.SideEffect
 import com.airatlovesmusic.shared.mvi.Update
+import com.airatlovesmusic.shared.router.Router
 import com.badoo.reaktive.single.asObservable
 import com.badoo.reaktive.single.map
 import com.badoo.reaktive.single.onErrorReturn
@@ -14,7 +15,8 @@ import org.koin.core.inject
 class ArticleFeatureComponent(
     url: String,
     stateListener: (State) -> Unit,
-    newsListener: (News) -> Unit
+    newsListener: (News) -> Unit,
+    private val router: Router? = null
 ): KoinComponent {
 
     private val articlesRepository by inject<ArticlesRepository>()
@@ -26,7 +28,7 @@ class ArticleFeatureComponent(
             when (msg) {
                 is Msg.GetArticle -> Update(cmd = Cmd.GetArticle(msg.url), state = state.copy(isLoading = true))
                 is Msg.GetArticleFailure -> Update.state(state.copy(isLoading = false))
-                is Msg.NewArticle -> Update.state(state.copy(article = msg.article))
+                is Msg.NewArticle -> Update.state(state.copy(article = msg.article, isLoading = false))
             }
         },
         commandHandler = { cmd ->
@@ -67,6 +69,10 @@ class ArticleFeatureComponent(
 
     fun dispose() {
         feature.dispose()
+    }
+
+    fun goBack() {
+        router?.goBack()
     }
 
 }

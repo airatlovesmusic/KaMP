@@ -19,14 +19,17 @@ class ArticlesFragment: BaseFragment(R.layout.fragment_articles) {
 
     private var binding: FragmentArticlesBinding? = null
 
-    private val adapter by lazy { ArticlesAdapter() }
+    private val adapter by lazy {
+        ArticlesAdapter { featureComponent.goToArticle(it.url) }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentArticlesBinding.bind(view)
         featureComponent = ArticlesFeatureComponent(
             stateListener = ::renderState,
-            newsListener = ::handleNews
+            newsListener = ::handleNews,
+            router = parentRouter
         )
         initRecycler()
     }

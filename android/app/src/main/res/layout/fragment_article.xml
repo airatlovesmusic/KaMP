@@ -10,23 +10,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@tools:sample/full_names"
-            style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            style="@style/TextAppearance.MaterialComponents.Headline6"/>
 
         <TextView
             android:id="@+id/tv_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@tools:sample/full_names"
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
     </LinearLayout>
 

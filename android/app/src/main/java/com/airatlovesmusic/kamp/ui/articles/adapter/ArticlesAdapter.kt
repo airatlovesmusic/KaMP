@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airatlovesmusic.kamp.R
 import com.airatlovesmusic.model.Article
 
-class ArticlesAdapter: RecyclerView.Adapter<ArticleHolder>() {
+class ArticlesAdapter(
+    private val onItemClickListener: (Article) -> Unit
+): RecyclerView.Adapter<ArticleHolder>() {
 
     private var list = listOf<Article>()
 
@@ -16,7 +18,7 @@ class ArticlesAdapter: RecyclerView.Adapter<ArticleHolder>() {
     }
 
     override fun onBindViewHolder(holder: ArticleHolder, position: Int) =
-        holder.bind(list[position])
+        holder.bind(list[position], onItemClickListener)
 
     override fun getItemCount() = list.size
 
