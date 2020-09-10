@@ -1,17 +1,15 @@
 package com.airatlovesmusic.kamp.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.airatlovesmusic.kamp.R
+import com.airatlovesmusic.shared.base.BaseActivity
+import com.airatlovesmusic.shared.router.Screen
+import com.airatlovesmusic.shared.router.Screens
+import org.koin.core.inject
 
-class AppActivity: AppCompatActivity() {
+class AppActivity: BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_container)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, MainFragment())
-            .commit()
-    }
+    private val screens by inject<Screens>()
+
+    override val launchScreen: Screen
+        get() = screens.articles()
 
 }

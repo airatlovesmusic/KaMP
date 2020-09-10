@@ -2,16 +2,18 @@ package com.airatlovesmusic.shared
 
 import com.airatlovesmusic.shared.data.network.networkSource
 import com.airatlovesmusic.shared.data.repository.ArticlesRepository
+import com.airatlovesmusic.shared.router.Screens
 import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(multiPlatformModule)
+fun initKoin(screens: Screens? = null) = startKoin {
+    modules(
+        multiPlatformModule,
+        module {
+            single { screens }
+        }
+    )
 }
-
-fun initKoin() = initKoin {}
 
 val multiPlatformModule = module {
     single { networkSource() }

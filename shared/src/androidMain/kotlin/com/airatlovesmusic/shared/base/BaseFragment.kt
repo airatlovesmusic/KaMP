@@ -1,26 +1,19 @@
 package com.airatlovesmusic.shared.base
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.airatlovesmusic.shared.router.Router
 import org.koin.core.KoinComponent
 
-abstract class BaseFragment : Fragment(), KoinComponent {
+abstract class BaseFragment(
+    layoutRes: Int
+) : Fragment(layoutRes), KoinComponent {
 
-    abstract val layoutRes: Int
-
-    protected val router: Router by lazy {
-        (parentFragment as BaseFlowFragment).router
+    protected val parentRouter: Router by lazy {
+        when (val parentFragment = parentFragment) {
+            is BaseFlowFragment -> parentFragment.router
+            else -> (activity as BaseActivity).router
+        }
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(layoutRes, container, false)
 
     open fun onBackPressed() {}
 

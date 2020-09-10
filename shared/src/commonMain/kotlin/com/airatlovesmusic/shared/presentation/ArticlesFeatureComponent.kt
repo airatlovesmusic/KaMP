@@ -5,6 +5,9 @@ import com.airatlovesmusic.shared.data.repository.ArticlesRepository
 import com.airatlovesmusic.shared.mvi.Feature
 import com.airatlovesmusic.shared.mvi.SideEffect
 import com.airatlovesmusic.shared.mvi.Update
+import com.airatlovesmusic.shared.router.Router
+import com.airatlovesmusic.shared.router.Screen
+import com.airatlovesmusic.shared.router.Screens
 import com.badoo.reaktive.maybe.asObservable
 import com.badoo.reaktive.maybe.map
 import com.badoo.reaktive.maybe.observeOn
@@ -22,10 +25,12 @@ import kotlin.contracts.Effect
 
 class ArticlesFeatureComponent(
     stateListener: (State) -> Unit,
-    newsListener: (News) -> Unit
+    newsListener: (News) -> Unit,
+    private val router: Router? = null
 ): KoinComponent {
 
     private val articlesRepository by inject<ArticlesRepository>()
+    private val screens by inject<Screens>()
 
     private val feature = Feature<State, Cmd, Msg, News>(
         initialState = State(),
@@ -76,6 +81,10 @@ class ArticlesFeatureComponent(
 
     fun dispatch(msg: Msg) {
         feature.accept(msg)
+    }
+
+    fun goToArticle(url: String) {
+        router?.goTo(screens.article(url))
     }
 
 }
