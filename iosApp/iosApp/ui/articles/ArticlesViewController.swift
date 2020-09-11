@@ -21,6 +21,7 @@ class ArticlesViewController: BaseViewController {
     private let articlesView = ArticlesView()
     
     private var feature: ArticlesFeatureComponent?
+    private var adapter: ArticlesAdapter?
     
     override var customView: UIView {
         return articlesView
@@ -31,6 +32,7 @@ class ArticlesViewController: BaseViewController {
         feature = ArticlesFeatureComponent(
             router: navigationController != nil ? Router(navigationController: navigationController!) : nil
         )
+        setUpTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,7 +56,44 @@ class ArticlesViewController: BaseViewController {
     }
     
     private func renderState(state: ArticlesFeatureComponent.State) {
-        articlesView.helloWorldLabel.text = state.description()
+        if (state.articles?.isEmpty == false) {
+            adapter?.array = state.articles ?? adapter!.array
+            articlesView.tableView.reloadData()
+        }
+    }
+    
+    private func setUpTableView() {
+        adapter = ArticlesAdapter()
+        articlesView.tableView.dataSource = adapter
+        articlesView.tableView.delegate = self
+    }
+    
+}
+
+extension ArticlesViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        feature?.goToArticle(url: adapter?.getArticle(indexPath).url ?? "")
+    }
+
+}
+
+class ArticlesAdapter: NSObject, UITableViewDataSource, UITableViewDelegate {
+    
+    var array = Array<ModelArticle>()
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return array.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Article") as? ArticleCell
+        cell?.configure(with: array[indexPath.row])
+        return cell ?? UITableViewCell()
+    }
+    
+    func getArticle(_ indexPath: IndexPath) -> ModelArticle {
+        return array[indexPath.row]
     }
     
 }

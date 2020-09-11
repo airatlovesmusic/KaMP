@@ -10,12 +10,13 @@ import UIKit
 
 class ArticlesView: BaseView {
     
-    lazy var helloWorldLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Hello World!"
-        return label
-    }()
-    
+      lazy var tableView: UITableView = {
+           let tableView = UITableView()
+           tableView.backgroundColor = .white
+           tableView.register(ArticleCell.self, forCellReuseIdentifier: "Article")
+           return tableView
+       }()
+
      override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -36,12 +37,12 @@ class ArticlesView: BaseView {
     }
 
     private func addSubviews() {
-        addSubview(helloWorldLabel)
+        addSubview(tableView)
     }
 
     private func makeConstraints() {
-        helloWorldLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 
