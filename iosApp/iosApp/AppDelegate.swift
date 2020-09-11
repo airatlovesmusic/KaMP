@@ -12,6 +12,7 @@ import shared
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let appLauncher = AppLauncher()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -20,14 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // DI
         KoinKt.doInitKoin(screens: ScreensImpl())
         
-        launchMainScreen()
+        appLauncher.launchMainScreen()
         return true
     }
 
-    private func launchMainScreen() {
-        guard let window = UIApplication.shared.keyWindow else { return }
-        let controller = UINavigationController(rootViewController: ArticlesViewController())
-        window.rootViewController = controller
-    }
 }
 
