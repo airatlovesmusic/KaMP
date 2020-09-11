@@ -13,7 +13,8 @@ class ArticlesView: BaseView {
       lazy var tableView: UITableView = {
            let tableView = UITableView()
            tableView.backgroundColor = .white
-           tableView.register(ArticleCell.self, forCellReuseIdentifier: "Article")
+           tableView.tableFooterView = UIView()
+           tableView.register(ArticleCell.self, forCellReuseIdentifier: ArticleCell.Constants.cellReuseIdentifier)
            return tableView
        }()
 
@@ -45,6 +46,5 @@ class ArticlesView: BaseView {
             make.edges.equalToSuperview()
         }
     }
-
     
 }

@@ -42,8 +42,8 @@ class ArticlesViewController: BaseViewController {
                 self?.renderState(state: state)
             },
             newsListener: { (news: ArticlesFeatureComponent.News) in
-                switch (news) {
-                    case let failure as ArticlesFeatureComponent.NewsGetArticlesFailure: print(failure.error)
+                switch news {
+                case is ArticlesFeatureComponent.NewsGetArticlesFailure: print("Error")
                     default: print("news - " + news.description)
                 }
             }
@@ -87,7 +87,7 @@ class ArticlesAdapter: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Article") as? ArticleCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.Constants.cellReuseIdentifier) as? ArticleCell
         cell?.configure(with: array[indexPath.row])
         return cell ?? UITableViewCell()
     }

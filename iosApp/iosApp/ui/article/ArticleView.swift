@@ -8,17 +8,17 @@
 
 import UIKit
 
+extension ArticleView {
+    struct Constants {
+        static let titleLabelHorizontalInset: CGFloat = 8
+        static let urlLabelHorizontalInset: CGFloat = 8
+    }
+}
+
 class ArticleView: UIView {
     
-    lazy var title: UILabel = {
-        let label = UILabel()
-        return UILabel()
-    }()
-    
-    lazy var url: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    lazy var titleLabel = UILabel()
+    lazy var urlLabel = UILabel()
     
     override init(frame: CGRect) {
        super.init(frame: frame)
@@ -40,20 +40,21 @@ class ArticleView: UIView {
    }
 
    private func addSubviews() {
-        addSubview(title)
-        addSubview(url)
+        addSubview(titleLabel)
+        addSubview(urlLabel)
    }
 
    private func makeConstraints() {
-        title.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.leading.equalToSuperview().offset(Constants.titleLabelHorizontalInset)
+            make.trailing.equalToSuperview().offset(Constants.titleLabelHorizontalInset)
         }
-        url.snp.makeConstraints { make in
-            make.top.equalTo(title.snp.bottom)
+        urlLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom)
             make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().offset(8)
+            make.leading.equalToSuperview().offset(Constants.titleLabelHorizontalInset)
+            make.trailing.equalToSuperview().offset(Constants.titleLabelHorizontalInset)
         }
    }
 

@@ -21,6 +21,7 @@ class ArticleScreen: Screen {
     override func getViewController() -> UIViewController {
         return ArticleViewController(url: url)
     }
+    
 }
 
 class ArticleViewController: BaseViewController {
@@ -62,8 +63,8 @@ class ArticleViewController: BaseViewController {
     }
     
     private func renderState(state: ArticleFeatureComponent.State) {
-        articleView.title.text = state.article?.title ?? ""
-        articleView.url.text = state.article?.url ?? ""
+        articleView.titleLabel.text = state.article?.title ?? ""
+        articleView.urlLabel.text = state.article?.url ?? ""
     }
     
 }

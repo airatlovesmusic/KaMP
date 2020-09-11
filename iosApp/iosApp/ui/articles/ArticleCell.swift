@@ -9,14 +9,19 @@
 import UIKit
 import shared
 
+extension ArticleCell {
+    struct Constants {
+        static let cellReuseIdentifier = "ArticleCell"
+        static let titleLabelHorizontalInset: CGFloat = 8
+    }
+}
+
+
 class ArticleCell: UITableViewCell {
 
     // MARK: - UI elements
 
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    lazy var titleLabel = UILabel()
 
     // MARK: - Init
 
@@ -47,8 +52,8 @@ class ArticleCell: UITableViewCell {
     private func makeConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview().inset(8)
-            make.right.equalToSuperview().inset(8)
+            make.leading.equalToSuperview().inset(Constants.titleLabelHorizontalInset)
+            make.right.equalToSuperview().inset(Constants.titleLabelHorizontalInset)
         }
     }
     
