@@ -14,24 +14,23 @@ import com.airatlovesmusic.shared.presentation.ArticleFeatureComponent.*
 class ArticleFragment: BaseFragment(R.layout.fragment_article) {
 
     private val url by lazy { requireArguments().getString(ARG_URL, "") }
-    private lateinit var featureComponent: ArticleFeatureComponent
+    private val featureComponent by lazy { ArticleFeatureComponent(url, parentRouter) }
 
     private var binding: FragmentArticleBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentArticleBinding.bind(view)
-        featureComponent = ArticleFeatureComponent(
-            url = url,
+        featureComponent.bindListeners(
             stateListener = ::renderState,
-            newsListener = ::renderNews,
-            router = parentRouter
+            newsListener = ::renderNews
         )
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         binding = null
+        featureComponent.dispose()
+        super.onDestroyView()
     }
 
     override fun onBackPressed() {

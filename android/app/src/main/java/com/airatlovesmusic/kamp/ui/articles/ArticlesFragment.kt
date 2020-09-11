@@ -15,8 +15,7 @@ import com.airatlovesmusic.shared.presentation.ArticlesFeatureComponent.*
 
 class ArticlesFragment: BaseFragment(R.layout.fragment_articles) {
 
-    private lateinit var featureComponent: ArticlesFeatureComponent
-
+    private val featureComponent by lazy { ArticlesFeatureComponent(parentRouter) }
     private var binding: FragmentArticlesBinding? = null
 
     private val adapter by lazy {
@@ -26,16 +25,16 @@ class ArticlesFragment: BaseFragment(R.layout.fragment_articles) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentArticlesBinding.bind(view)
-        featureComponent = ArticlesFeatureComponent(
+        featureComponent.bindListeners(
             stateListener = ::renderState,
-            newsListener = ::handleNews,
-            router = parentRouter
+            newsListener = ::handleNews
         )
         initRecycler()
     }
 
     override fun onDestroyView() {
         binding = null
+        featureComponent.dispose()
         super.onDestroyView()
     }
 
