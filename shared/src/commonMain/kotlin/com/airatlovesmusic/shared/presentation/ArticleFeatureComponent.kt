@@ -14,12 +14,13 @@ import org.koin.core.inject
 
 class ArticleFeatureComponent(
     url: String,
-    stateListener: (State) -> Unit,
-    newsListener: (News) -> Unit,
     private val router: Router? = null
 ): KoinComponent {
 
     private val articlesRepository by inject<ArticlesRepository>()
+
+    private var stateListener: (State) -> Unit = {}
+    private var newsListener: (News) -> Unit = {}
 
     private val feature = Feature<State, Cmd, Msg, News>(
         initialState = State(),
@@ -40,8 +41,8 @@ class ArticleFeatureComponent(
                         .asObservable()
             }
         },
-        stateListener = stateListener,
-        newsListener = newsListener
+        stateListener = { stateListener.invoke(it) },
+        newsListener = { newsListener.invoke(it) }
     )
 
     data class State(
@@ -63,12 +64,23 @@ class ArticleFeatureComponent(
         data class GetArticleFailure(val throwable: Throwable): News()
     }
 
+    fun bindListeners(
+        stateListener: (State) -> Unit,
+        newsListener: (News) -> Unit
+    ) {
+        stateListener.invoke(feature.getCurrentState())
+        this.stateListener = stateListener
+        this.newsListener = newsListener
+    }
+
     fun dispatch(msg: Msg) {
         feature.accept(msg)
     }
 
     fun dispose() {
         feature.dispose()
+        stateListener = {}
+        newsListener = {}
     }
 
     fun goBack() {
