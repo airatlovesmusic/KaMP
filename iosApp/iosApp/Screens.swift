@@ -14,6 +14,6 @@ class ScreensImpl: Screens {
         return ArticlesScreen()
     }
     func article(url: String) -> Screen {
-        return ArticlesScreen()
+        return ArticleScreen(url: url)
     }
 }
