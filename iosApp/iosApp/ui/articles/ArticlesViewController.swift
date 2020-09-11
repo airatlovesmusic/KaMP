@@ -20,13 +20,22 @@ class ArticlesViewController: BaseViewController {
     
     private let articlesView = ArticlesView()
     
+    private var feature: ArticlesFeatureComponent?
+    
     override var customView: UIView {
         return articlesView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let feature: ArticlesFeatureComponent = ArticlesFeatureComponent(
+        feature = ArticlesFeatureComponent(
+            router: navigationController != nil ? Router(navigationController: navigationController!) : nil
+        )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        feature?.bindListeners(
             stateListener: { [weak self] (state: ArticlesFeatureComponent.State) in
                 self?.renderState(state: state)
             },
@@ -35,9 +44,13 @@ class ArticlesViewController: BaseViewController {
                     case let failure as ArticlesFeatureComponent.NewsGetArticlesFailure: print(failure.error)
                     default: print("news - " + news.description)
                 }
-            },
-            router: nil
+            }
         )
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        feature?.dispose()
     }
     
     private func renderState(state: ArticlesFeatureComponent.State) {

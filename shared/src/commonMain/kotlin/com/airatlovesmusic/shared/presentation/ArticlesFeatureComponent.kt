@@ -24,21 +24,30 @@ import org.koin.core.inject
 import kotlin.contracts.Effect
 
 class ArticlesFeatureComponent(
-    stateListener: (State) -> Unit,
-    newsListener: (News) -> Unit,
     private val router: Router? = null
 ): KoinComponent {
 
     private val articlesRepository by inject<ArticlesRepository>()
     private val screens by inject<Screens>()
 
+    private var stateListener: ((State) -> Unit)? = null
+    private var newsListener: ((News) -> Unit)? = null
+
     private val feature = Feature<State, Cmd, Msg, News>(
         initialState = State(),
         initialMessages = setOf(Msg.GetArticles),
         reducer = { msg, state ->
             when (msg) {
-                is Msg.GetArticles -> Update(cmd = Cmd.GetArticles, state = state.copy(isLoading = true))
-                is Msg.NewArticles -> Update.state(state.copy(articles = msg.list, isLoading = false))
+                is Msg.GetArticles -> Update(
+                    cmd = Cmd.GetArticles,
+                    state = state.copy(isLoading = true)
+                )
+                is Msg.NewArticles -> Update.state(
+                    state.copy(
+                        articles = msg.list,
+                        isLoading = false
+                    )
+                )
                 is Msg.GetArticlesFailure -> Update.state(state.copy(isLoading = false))
             }
         },
@@ -47,12 +56,17 @@ class ArticlesFeatureComponent(
                 is Cmd.GetArticles ->
                     articlesRepository.getArticles()
                         .map { SideEffect.msg<Msg, News>(Msg.NewArticles(it)) }
-                        .onErrorReturn { SideEffect(msg = Msg.GetArticlesFailure, news = News.GetArticlesFailure("error")) }
+                        .onErrorReturn {
+                            SideEffect(
+                                msg = Msg.GetArticlesFailure,
+                                news = News.GetArticlesFailure("error")
+                            )
+                        }
                         .asObservable()
             }
         },
-        stateListener = stateListener,
-        newsListener = newsListener
+        stateListener = { stateListener?.invoke(it) },
+        newsListener = { newsListener?.invoke(it) }
     )
 
     data class State(
@@ -75,8 +89,19 @@ class ArticlesFeatureComponent(
         data class GetArticlesFailure(val error: String): News()
     }
 
+    fun bindListeners(
+        stateListener: (State) -> Unit,
+        newsListener: (News) -> Unit
+    ) {
+        stateListener.invoke(feature.getCurrentState())
+        this.stateListener = stateListener
+        this.newsListener = newsListener
+    }
+
     fun dispose() {
         feature.dispose()
+        stateListener = {}
+        newsListener = {}
     }
 
     fun dispatch(msg: Msg) {

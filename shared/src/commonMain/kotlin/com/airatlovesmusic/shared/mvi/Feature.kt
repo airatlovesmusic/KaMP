@@ -51,6 +51,8 @@ class Feature<out State, Cmd, Msg: Any, out News> (
         initialMessages.forEach { msgSubject.onNext(it) }
     }
 
+    fun getCurrentState(): State = stateSubject.value
+
     fun accept(msg: Any) {
         msgSubject.onNext(msg as Msg)
     }
