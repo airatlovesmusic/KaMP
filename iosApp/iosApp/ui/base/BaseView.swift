@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class BaseView: UIView {
     
@@ -20,6 +21,14 @@ class BaseView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("not been implemented")
+    }
+
+    func makeDefaultConstraints(in viewController: UIViewController) {
+        contentView.snp.makeConstraints { make in
+            make.top.equalTo(viewController.topLayoutGuide.snp.bottom)
+            make.bottom.equalTo(viewController.bottomLayoutGuide.snp.top)
+            make.leading.trailing.equalToSuperview()
+        }
     }
     
 }

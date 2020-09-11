@@ -202,6 +202,7 @@
 			mainGroup = 84A7A2112507804800FDD090;
 			packageReferences = (
 				84D61AED250A9918006B13E1 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				84C9E580250B668A00BD2692 /* XCRemoteSwiftPackageReference "BonMot" */,
 			);
 			productRefGroup = 84A7A21B2507804800FDD090 /* Products */;
 			projectDirPath = "";
@@ -458,6 +459,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		84C9E580250B668A00BD2692 /* XCRemoteSwiftPackageReference "BonMot" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Rightpoint/BonMot";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.5.1;
+			};
+		};
 		84D61AED250A9918006B13E1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";

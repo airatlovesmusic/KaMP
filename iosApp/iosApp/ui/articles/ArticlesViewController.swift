@@ -20,10 +20,15 @@ class ArticlesViewController: BaseViewController {
     
     private let articlesView = ArticlesView()
     
-    let feature: ArticlesFeatureComponent =
-        ArticlesFeatureComponent(
-            stateListener: { (state: ArticlesFeatureComponent.State) in
-                print("state - " + state.description())
+    override var customView: UIView {
+        return articlesView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let feature: ArticlesFeatureComponent = ArticlesFeatureComponent(
+            stateListener: { [weak self] (state: ArticlesFeatureComponent.State) in
+                self?.renderState(state: state)
             },
             newsListener: { (news: ArticlesFeatureComponent.News) in
                 switch (news) {
@@ -33,13 +38,10 @@ class ArticlesViewController: BaseViewController {
             },
             router: nil
         )
-    
-    override var customView: UIView {
-        return articlesView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func renderState(state: ArticlesFeatureComponent.State) {
+        articlesView.helloWorldLabel.text = state.description()
     }
     
 }

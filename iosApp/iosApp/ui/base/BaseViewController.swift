@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class BaseViewController: UIViewController {
     
@@ -22,8 +23,12 @@ class BaseViewController: UIViewController {
     override func loadView() {
         view = baseView
         view.backgroundColor = .white
+        baseView.makeDefaultConstraints(in: self)
         baseView.contentView.addSubview(customView)
         customView.backgroundColor = .white
+        customView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
 }

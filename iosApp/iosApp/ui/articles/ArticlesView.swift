@@ -6,7 +6,6 @@
 //  Copyright © 2020 Айрат Халилов. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class ArticlesView: BaseView {
@@ -17,13 +16,34 @@ class ArticlesView: BaseView {
         return label
     }()
     
-    override init(frame: CGRect) {
+     override init(frame: CGRect) {
         super.init(frame: frame)
+        commonInit()
+     }
+
+     required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+     }
+
+     private func commonInit() {
+        setupStyle()
+        addSubviews()
+        makeConstraints()
+    }
+
+    private func setupStyle() {
+        backgroundColor = .white
+    }
+
+    private func addSubviews() {
         addSubview(helloWorldLabel)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("view doesn't implement init(:coder))")
+
+    private func makeConstraints() {
+        helloWorldLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
+
     
 }
