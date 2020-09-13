@@ -1,2 +1,2 @@
 # KaMP
-### Sample Kotlin Multimobile project
+### Sample Kotlin Multiplatform project (currently iOS and Android)
