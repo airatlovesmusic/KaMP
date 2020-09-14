@@ -27,11 +27,11 @@ class ArticleScreen: Screen {
 class ArticleViewController: BaseViewController {
     
     private let articleView = ArticleView()
-    private var feature: ArticleFeatureComponent?
+    private var featureComponent: ArticleFeatureComponent?
     
     init(url: String) {
         super.init(nibName: nil, bundle: nil)
-        feature = ArticleFeatureComponent(
+        featureComponent = ArticleFeatureComponent(
             url: url,
             router: navigationController != nil ? Router(navigationController: navigationController!) : nil
         )
@@ -47,7 +47,7 @@ class ArticleViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        feature?.bindListeners(
+        featureComponent?.bindListeners(
             stateListener: { [weak self] (state: ArticleFeatureComponent.State) in
                 self?.renderState(state: state)
             },
@@ -59,7 +59,7 @@ class ArticleViewController: BaseViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        feature?.dispose()
+        featureComponent?.dispose()
     }
     
     private func renderState(state: ArticleFeatureComponent.State) {

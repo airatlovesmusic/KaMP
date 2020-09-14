@@ -20,7 +20,7 @@ class ArticlesViewController: BaseViewController {
     
     private let articlesView = ArticlesView()
     
-    private var feature: ArticlesFeatureComponent?
+    private var featureComponent: ArticlesFeatureComponent?
     private var adapter: ArticlesAdapter?
     
     override var customView: UIView {
@@ -29,7 +29,7 @@ class ArticlesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        feature = ArticlesFeatureComponent(
+        featureComponent = ArticlesFeatureComponent(
             router: navigationController != nil ? Router(navigationController: navigationController!) : nil
         )
         setUpTableView()
@@ -37,7 +37,7 @@ class ArticlesViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        feature?.bindListeners(
+        featureComponent?.bindListeners(
             stateListener: { [weak self] (state: ArticlesFeatureComponent.State) in
                 self?.renderState(state: state)
             },
@@ -52,7 +52,7 @@ class ArticlesViewController: BaseViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        feature?.dispose()
+        featureComponent?.dispose()
     }
     
     private func renderState(state: ArticlesFeatureComponent.State) {
@@ -73,7 +73,7 @@ class ArticlesViewController: BaseViewController {
 extension ArticlesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        feature?.goToArticle(url: adapter?.getArticle(indexPath).url ?? "")
+        featureComponent?.goToArticle(url: adapter?.getArticle(indexPath).url ?? "")
     }
 
 }
