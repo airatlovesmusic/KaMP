@@ -7,6 +7,7 @@ import react.dom.render
 
 fun main() {
 //    initKoin()
+    // https://github.com/felipehjcosta/chat-app
     render(document.getElementById("root")) {
         app()
     }

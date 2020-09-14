@@ -1,75 +1,26 @@
 package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp
 
-import kotlinext.js.js
-import kotlinx.html.ButtonType
-import kotlinx.html.InputType
-import kotlinx.html.js.onChangeFunction
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
 import react.dom.*
-import react.router.dom.navLink
 
-class Articles : RComponent<RProps, Articles.WelcomeState>() {
+class Articles : RComponent<RProps, Articles.ArticlesState>() {
 
     init {
-        state = WelcomeState()
-    }
-
-    private fun RBuilder.renderTitle() {
-        div(classes = "row justify-content-md-center p-4") {
-            h3(classes = "title") { +"Welcome to Global Chat" }
-        }
-    }
-
-    private fun RBuilder.renderWelcomeForm() {
-        div(classes = "row justify-content-md-center") {
-            div(classes = "input-group welcome-input-group") {
-                attrs["style"] = js { width = "50%" }
-
-                renderUsernameInput()
-                renderLoginButton()
-            }
-        }
-    }
-
-    private fun RBuilder.renderUsernameInput() {
-        input(classes = "form-control text-center", type = InputType.search) {
-            attrs.placeholder = "Nickname..."
-
-            attrs {
-                value = state.username
-                onChangeFunction = ::usernameInputOnChangeHandler
-            }
-        }
-    }
-
-
-    private fun usernameInputOnChangeHandler(event: Event) {
-        event.target.unsafeCast<HTMLInputElement>().value.run {
-
-        }
-    }
-
-    private fun RBuilder.renderLoginButton() {
-        span(classes = "input-group-append") {
-            navLink("/chat/${state.username}") {
-                button(classes = "btn btn-outline-secondary", type = ButtonType.button) {
-                    +"Enter"
-                }
-            }
-        }
+        state = ArticlesState()
     }
 
     override fun RBuilder.render() {
         div(classes = "container") {
-            renderTitle()
-            renderWelcomeForm()
+            span {
+                h2(classes = "title") { +"Hello world!" }
+            }
         }
     }
 
-    class WelcomeState(var username: String = "") : RState
+
+
+    class ArticlesState(var list: List<String> = listOf()) : RState
 }
