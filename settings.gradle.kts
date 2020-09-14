@@ -10,6 +10,5 @@ include(":model")
 include (":shared")
 include (":backend")
 include (":android:app")
+include(":js")
 rootProject.name = "KaMP"
-
-enableFeaturePreview("GRADLE_METADATA")

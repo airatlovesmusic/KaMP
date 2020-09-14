@@ -33,7 +33,9 @@ kotlin {
             }
         }
     }
-    js()
+    js {
+        browser()
+    }
 
     sourceSets {
         all {
@@ -66,6 +68,7 @@ kotlin {
         }
         val jsMain by getting {
             dependencies {
+                implementation(kotlin("stdlib-js"))
                 implementation("io.ktor:ktor-client-js:1.4.0")
                 implementation("com.badoo.reaktive:coroutines-interop-js:1.1.17")
             }
