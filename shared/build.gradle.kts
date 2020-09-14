@@ -33,6 +33,7 @@ kotlin {
             }
         }
     }
+    js()
 
     sourceSets {
         all {
@@ -62,6 +63,12 @@ kotlin {
         }
         val iosMain by getting {
             dependsOn(commonMain)
+        }
+        val jsMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:1.4.0")
+                implementation("com.badoo.reaktive:coroutines-interop-js:1.1.17")
+            }
         }
     }
 }

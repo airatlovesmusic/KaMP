@@ -19,6 +19,7 @@ kotlin {
             }
         }
     }
+    js()
     sourceSets {
         val commonMain by getting {
             dependencies {
