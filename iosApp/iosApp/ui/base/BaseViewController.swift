@@ -9,13 +9,20 @@
 import Foundation
 import UIKit
 import SnapKit
+import shared
 
 class BaseViewController: UIViewController {
     
     private let baseView = BaseView()
+    var router: Router?
     
     var customView: UIView {
         return UIView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        router = navigationController != nil ? Router(navigationController: navigationController!) : nil
     }
     
     func makeDefaultConstraints(in viewController: UIViewController) {}

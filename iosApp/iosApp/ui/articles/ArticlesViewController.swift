@@ -29,9 +29,7 @@ class ArticlesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        featureComponent = ArticlesFeatureComponent(
-            router: navigationController != nil ? Router(navigationController: navigationController!) : nil
-        )
+        featureComponent = ArticlesFeatureComponent(router: router)
         setUpTableView()
     }
     
