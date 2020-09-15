@@ -22,9 +22,14 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
                 setState {
                     isLoading = state.isLoading
                     list = state.articles
+                    hasFailure = false
                 }
             },
-            newsListener = {}
+            newsListener = {
+                setState {
+                    hasFailure = true
+                }
+            }
         )
     }
 
@@ -40,12 +45,10 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
 
     private fun RDOMBuilder<DIV>.renderList() {
         state.list?.let {
-            span {
-                it.forEach { article ->
-                    navLink(to = "/article/${article.url}") {
-                        h2(classes = "title") {
-                            +article.title
-                        }
+            it.forEach { article ->
+                navLink(to = "/article/${article.url}") {
+                    h2(classes = "title") {
+                        +article.title
                     }
                 }
             }
@@ -56,11 +59,13 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
         div(classes = "container") {
             renderProgress()
             renderList()
+            error(state.hasFailure)
         }
     }
 
     data class ArticlesState(
         var list: List<Article>? = null,
-        var isLoading: Boolean = false
+        var isLoading: Boolean = false,
+        var hasFailure: Boolean = false
     ): RState
 }

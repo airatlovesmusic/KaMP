@@ -23,17 +23,24 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
                 setState {
                     isLoading = it.isLoading
                     article = it.article
+                    hasFailure = false
                 }
             },
-            newsListener = {}
+            newsListener = {
+                when (it) {
+                    is ArticleFeatureComponent.News.GetArticleFailure ->
+                        setState {
+                            hasFailure = true
+                        }
+                }
+            }
         )
     }
 
     override fun RBuilder.render() {
         div("container") {
-            span {
-                renderTitle()
-            }
+            renderTitle()
+            error(state.hasFailure)
         }
     }
 
@@ -51,7 +58,8 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
 
     data class ArticleState(
         var isLoading: Boolean = false,
-        var article: ArticleModel? = null
+        var article: ArticleModel? = null,
+        var hasFailure: Boolean = false
     ): RState
 
 }
