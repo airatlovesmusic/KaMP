@@ -3,10 +3,9 @@ package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp
 import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.presentation.ArticlesFeatureComponent
 import kotlinx.html.DIV
-import kotlinx.html.js.onClickFunction
-import org.w3c.dom.events.Event
 import react.*
 import react.dom.*
+import react.router.dom.navLink
 
 class Articles : RComponent<RProps, Articles.ArticlesState>() {
 
@@ -26,11 +25,6 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
         )
     }
 
-    private fun onArticleClicked(event: Event, url: String) {
-        event.preventDefault()
-        feature.goToArticle(url)
-    }
-
     private fun RDOMBuilder<DIV>.renderProgress() {
         if (state.isLoading) {
             progress {}
@@ -41,12 +35,9 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
         state.list?.let {
             span {
                 it.forEach { article ->
-                    h2(classes = "title") {
-                        +article.title
-                        attrs {
-                            onClickFunction = {
-                                onArticleClicked(it, article.url)
-                            }
+                    navLink(to = "/article/${article.url}") {
+                        h2(classes = "title") {
+                            +article.title
                         }
                     }
                 }

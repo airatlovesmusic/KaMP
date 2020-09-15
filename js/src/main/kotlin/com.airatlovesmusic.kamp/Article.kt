@@ -9,10 +9,13 @@ import com.airatlovesmusic.model.Article as ArticleModel
 
 class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
 
-    private val feature: ArticleFeatureComponent
+    private lateinit var feature: ArticleFeatureComponent
 
     init {
         state = ArticleState()
+    }
+
+    override fun componentWillMount() {
         feature = ArticleFeatureComponent(props.url)
         feature.bindListeners(
             stateListener = {
@@ -28,7 +31,15 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
     override fun RBuilder.render() {
         div("container") {
             span {
-                h6(classes = "title") { +"Hello World" }
+                renderTitle()
+            }
+        }
+    }
+
+    private fun RBuilder.renderTitle() {
+        state.article?.let { article ->
+            span {
+                h6(classes = "title") { +article.title }
             }
         }
     }
@@ -44,7 +55,6 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
 
 }
 
-fun RBuilder.article(url: String) =
-    child(Article::class) {
-        attrs.url = url
-    }
+fun RBuilder.article(url: String) = child(Article::class) {
+    attrs.url = url
+}
