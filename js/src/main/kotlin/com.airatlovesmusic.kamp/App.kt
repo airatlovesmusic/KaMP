@@ -11,5 +11,8 @@ fun RBuilder.app() =
             route("/", exact = true) {
                 child(Articles::class) {}
             }
+            route<Article.ArticleProps>("/article/:url") { props ->
+                article(props.match.params.url)
+            }
         }
     }
