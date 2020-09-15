@@ -14,13 +14,13 @@ repositories {
 kotlin {
     js {
         browser {
-//            compilations.all {
-//                kotlinOptions {
-//                    metaInfo = true
-//                    sourceMap = true
-//                    main = "call"
-//                }
-//            }
+            compilations.all {
+                kotlinOptions {
+                    metaInfo = true
+                    sourceMap = true
+                    main = "call"
+                }
+            }
         }
         binaries.executable()
     }
