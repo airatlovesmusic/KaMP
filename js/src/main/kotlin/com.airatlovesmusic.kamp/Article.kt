@@ -15,10 +15,11 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
         state = ArticleState()
     }
 
-    override fun componentWillMount() {
+    override fun componentDidMount() {
         feature = ArticleFeatureComponent(props.url)
         feature.bindListeners(
             stateListener = {
+                println(it)
                 setState {
                     isLoading = it.isLoading
                     article = it.article

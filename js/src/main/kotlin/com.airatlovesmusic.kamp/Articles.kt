@@ -9,10 +9,13 @@ import react.router.dom.navLink
 
 class Articles : RComponent<RProps, Articles.ArticlesState>() {
 
-    private val feature: ArticlesFeatureComponent
+    private lateinit var feature: ArticlesFeatureComponent
 
     init {
         state = ArticlesState()
+    }
+
+    override fun componentDidMount() {
         feature = ArticlesFeatureComponent()
         feature.bindListeners(
             stateListener = { state ->
@@ -23,6 +26,10 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
             },
             newsListener = {}
         )
+    }
+
+    override fun componentWillUnmount() {
+        feature.dispose()
     }
 
     private fun RDOMBuilder<DIV>.renderProgress() {
