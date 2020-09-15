@@ -27,7 +27,7 @@ kotlin {
 }
 
 dependencies {
-//    implementation(project(":shared"))
+    implementation(project(":shared"))
     implementation(kotlin("stdlib-js"))
     implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.1")
 
