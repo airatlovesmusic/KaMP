@@ -1,2 +1,2 @@
 # KaMP
-### Sample Kotlin Multiplatform project (currently iOS and Android)
+### Sample Kotlin Multiplatform project (currently iOS, Android and Frontent (React js))
