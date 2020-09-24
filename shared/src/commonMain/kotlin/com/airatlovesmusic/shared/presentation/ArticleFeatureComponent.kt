@@ -6,9 +6,9 @@ import com.airatlovesmusic.shared.mvi.Feature
 import com.airatlovesmusic.shared.mvi.SideEffect
 import com.airatlovesmusic.shared.mvi.Update
 import com.airatlovesmusic.shared.router.Router
-import com.badoo.reaktive.single.asObservable
-import com.badoo.reaktive.single.map
-import com.badoo.reaktive.single.onErrorReturn
+import com.badoo.reaktive.scheduler.ioScheduler
+import com.badoo.reaktive.scheduler.mainScheduler
+import com.badoo.reaktive.single.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -36,6 +36,8 @@ class ArticleFeatureComponent(
             when (cmd) {
                 is Cmd.GetArticle ->
                     articlesRepository.getArticle(cmd.url)
+                        .subscribeOn(ioScheduler)
+                        .observeOn(mainScheduler)
                         .map { SideEffect<Msg, News>(msg = Msg.NewArticle(it)) }
                         .onErrorReturn { SideEffect<Msg, News>(msg = Msg.GetArticleFailure(it), news = News.GetArticleFailure(it)) }
                         .asObservable()

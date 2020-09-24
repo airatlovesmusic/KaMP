@@ -52,6 +52,8 @@ kotlin {
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
                 implementation("com.badoo.reaktive:reaktive:1.1.17")
                 implementation("com.badoo.reaktive:utils:1.1.17")
+                implementation("com.badoo.reaktive:coroutines-interop:1.1.17")
+                implementation("io.ktor:ktor-client-core:1.4.0")
                 api("org.koin:koin-core:3.0.1-alpha-2")
                 api(project(":model"))
             }
@@ -61,16 +63,21 @@ kotlin {
                 implementation(kotlin("stdlib"))
                 implementation("androidx.core:core-ktx:1.3.1")
                 implementation("androidx.appcompat:appcompat:1.2.0")
+                implementation("io.ktor:ktor-client-okhttp:1.4.0")
             }
         }
         val iosMain by getting {
             dependsOn(commonMain)
+            dependencies {
+                implementation("io.ktor:ktor-client-cio:1.4.0")
+            }
         }
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
                 implementation("io.ktor:ktor-client-js:1.4.0")
                 implementation("com.badoo.reaktive:coroutines-interop-js:1.1.17")
+                implementation("io.ktor:ktor-client-js:1.4.0")
             }
         }
     }
