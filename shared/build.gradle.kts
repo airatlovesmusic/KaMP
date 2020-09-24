@@ -67,16 +67,14 @@ kotlin {
             }
         }
         val iosMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("io.ktor:ktor-client-cio:1.4.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt") { isForce = true }
             }
         }
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
-                implementation("io.ktor:ktor-client-js:1.4.0")
-                implementation("com.badoo.reaktive:coroutines-interop-js:1.1.17")
                 implementation("io.ktor:ktor-client-js:1.4.0")
             }
         }

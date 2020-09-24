@@ -11,8 +11,7 @@
 		84A7A2242507804E00FDD090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A7A2232507804E00FDD090 /* Assets.xcassets */; };
 		84A7A2272507804E00FDD090 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A7A2262507804E00FDD090 /* Preview Assets.xcassets */; };
 		84A7A22A2507804E00FDD090 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A7A2282507804E00FDD090 /* LaunchScreen.storyboard */; };
-		84A7A2332507806F00FDD090 /* shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A7A2322507806F00FDD090 /* shared.framework */; };
-		84A7A2342507806F00FDD090 /* shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84A7A2322507806F00FDD090 /* shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84AA6111251CF99500DB1613 /* shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A7A2322507806F00FDD090 /* shared.framework */; };
 		84C9E584250B7F8700BD2692 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9E583250B7F8700BD2692 /* ArticleCell.swift */; };
 		84C9E588250B89F400BD2692 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9E587250B89F400BD2692 /* ArticleView.swift */; };
 		84C9E58A250B98B200BD2692 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9E589250B98B100BD2692 /* AppLauncher.swift */; };
@@ -25,20 +24,6 @@
 		84D61AEC250A83DF006B13E1 /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D61AEB250A83DF006B13E1 /* Screens.swift */; };
 		84D61AEF250A9918006B13E1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84D61AEE250A9918006B13E1 /* SnapKit */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		84A7A2352507806F00FDD090 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				84A7A2342507806F00FDD090 /* shared.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		84A7A21A2507804800FDD090 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,8 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A7A2332507806F00FDD090 /* shared.framework in Frameworks */,
 				84D61AEF250A9918006B13E1 /* SnapKit in Frameworks */,
+				84AA6111251CF99500DB1613 /* shared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +153,6 @@
 			buildConfigurationList = 84A7A22E2507804E00FDD090 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
 				84A7A236250780F500FDD090 /* Run Script */,
-				84A7A2352507806F00FDD090 /* Embed Frameworks */,
 				84A7A2162507804800FDD090 /* Sources */,
 				84A7A2172507804800FDD090 /* Frameworks */,
 				84A7A2182507804800FDD090 /* Resources */,
