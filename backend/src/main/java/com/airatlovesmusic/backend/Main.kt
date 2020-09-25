@@ -5,5 +5,6 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 
 fun main(args: Array<String>) {
-    embeddedServer(Netty, commandLineEnvironment(args)).start(true)
+    val port = System.getenv("PORT")?.toInt() ?: 23567
+    embeddedServer(Netty, port){}.start(true)
 }

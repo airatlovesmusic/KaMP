@@ -1,29 +1,21 @@
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
-
 plugins {
-    kotlin("jvm")
     application
+    kotlin("jvm")
+    kotlin("plugin.serialization")
+    id("com.heroku.sdk.heroku-gradle") version "1.0.4"
 }
 
 application {
     mainClassName = "io.ktor.server.netty.EngineMain"
 }
 
-
-kotlin {
-    experimental {
-        coroutines = Coroutines.ENABLE
-    }
-}
-
-repositories {
-    mavenCentral()
-    jcenter()
-    maven(url = "https://dl.bintray.com/kotlin/ktor")
+heroku {
+    appName = "kmp-backend"
+    jdkVersion = "8"
 }
 
 dependencies {
-    implementation(project(":model"))
+    implementation(project(path =":model"))
     implementation(kotlin("stdlib"))
 
     val ktorVersion = "1.4.0"
@@ -36,7 +28,7 @@ tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+    create("stage") {
+        dependsOn(getByName("installDist"))
     }
 }

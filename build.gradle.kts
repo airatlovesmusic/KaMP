@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.0-alpha10")
+        classpath("com.android.tools.build:gradle:4.2.0-alpha12")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlin_version")
         classpath(kotlin("gradle-plugin", kotlin_version))
     }
@@ -23,4 +23,8 @@ allprojects {
 
 repositories {
     mavenCentral()
+}
+
+tasks.create("stage") {
+    dependsOn(":backend:stage")
 }

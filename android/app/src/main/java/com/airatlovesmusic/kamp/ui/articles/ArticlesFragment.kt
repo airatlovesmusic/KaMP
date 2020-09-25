@@ -2,6 +2,7 @@ package com.airatlovesmusic.kamp.ui.articles
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,6 +21,7 @@ class ArticlesFragment: BaseFragment(R.layout.fragment_articles) {
 
     private val adapter by lazy {
         ArticlesAdapter { featureComponent.goToArticle(it.url) }
+        ViewGroup
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
