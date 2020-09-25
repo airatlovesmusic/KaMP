@@ -11,6 +11,7 @@ application {
 
 heroku {
     appName = "kmp-backend"
+    includes = listOf("./backend/build/libs/backend.jar")
     jdkVersion = "8"
 }
 
