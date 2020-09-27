@@ -2,17 +2,10 @@ plugins {
     application
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("com.heroku.sdk.heroku-gradle") version "1.0.4"
 }
 
 application {
     mainClassName = "io.ktor.server.netty.EngineMain"
-}
-
-heroku {
-    appName = "kmp-backend"
-    includes = listOf("./backend/build/libs/backend.jar")
-    jdkVersion = "8"
 }
 
 dependencies {
