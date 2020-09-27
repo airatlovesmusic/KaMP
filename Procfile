@@ -1,1 +1,1 @@
-web: java -jar backend/build/libs/backend.jar
+web: backend/build/install/backend/bin/backend
