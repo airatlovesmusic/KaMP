@@ -5,7 +5,7 @@ plugins {
 }
 
 application {
-    mainClassName = "io.ktor.server.netty.EngineMain"
+    mainClassName = "com.airatlovesmusic.backend.MainKt"
 }
 
 dependencies {
