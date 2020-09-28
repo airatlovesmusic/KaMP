@@ -12,8 +12,8 @@ fun Routing.article() {
     }
     route("/article") {
         get {
-            call.request.queryParameters["url"]?.let { url ->
-                getArticles().firstOrNull { it.url == url }?.let {
+            call.request.queryParameters["id"]?.let { id ->
+                getArticles().firstOrNull { it.id == id.toIntOrNull() }?.let {
                     call.respond(it)
                 } ?: call.respond(HttpStatusCode.NotFound)
             } ?: call.respond(HttpStatusCode.BadRequest)
@@ -21,9 +21,10 @@ fun Routing.article() {
     }
 }
 
-private fun getArticles() = (0..5).map {
+private fun getArticles() = (0..10).map {
     Article(
-        title = "Title $it",
+        id = it,
+        title = "Article #$it",
         url = "https://i.pinimg.com/736x/3c/9d/b8/3c9db857044dfc08176aa90d242799f5.jpg"
     )
 }
