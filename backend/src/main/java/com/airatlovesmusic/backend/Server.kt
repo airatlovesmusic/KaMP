@@ -3,7 +3,7 @@ package com.airatlovesmusic.backend
 import com.google.gson.GsonBuilder
 import io.ktor.application.Application
 import io.ktor.application.install
-import io.ktor.features.ContentNegotiation
+import io.ktor.features.*
 import io.ktor.gson.GsonConverter
 import io.ktor.http.ContentType
 import io.ktor.routing.*
@@ -20,6 +20,7 @@ fun Application.module() {
             )
         )
     }
+    install(CORS)
     install(Routing) {
         article()
     }
