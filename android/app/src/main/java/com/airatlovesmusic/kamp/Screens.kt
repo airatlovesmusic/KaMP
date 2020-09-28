@@ -9,7 +9,7 @@ class ScreensImpl: Screens {
     override fun articles() = object : Screen() {
         override fun getFragment() = ArticlesFragment()
     }
-    override fun article(url: String) = object: Screen() {
-        override fun getFragment() = ArticleFragment.create(url)
+    override fun article(id: Int) = object: Screen() {
+        override fun getFragment() = ArticleFragment.create(id)
     }
 }

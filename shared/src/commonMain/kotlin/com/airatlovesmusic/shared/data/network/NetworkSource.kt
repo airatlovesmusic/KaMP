@@ -11,6 +11,7 @@ import kotlinx.serialization.json.Json
 
 interface NetworkSource {
     fun getArticles(): Single<List<Article>>
+    fun getArticle(id: Int): Single<Article>
 }
 
 class NetworkSourceImpl: NetworkSource {
@@ -19,12 +20,18 @@ class NetworkSourceImpl: NetworkSource {
 
     override fun getArticles(): Single<List<Article>> =
         singleFromCoroutine {
-            httpClient.get<String>("${Constants.BaseUrl.GITHUB}/${NetworkConstants.ARTICLES_ENDPOINT}")
+            httpClient.get<String>("${Constants.BaseUrl.PROD}/${NetworkConstants.ARTICLES_ENDPOINT}")
                 .let { Json.decodeFromString(ListSerializer(Article.serializer()), it) }
         }
 
+    override fun getArticle(id: Int): Single<Article> =
+        singleFromCoroutine {
+            httpClient.get<String>("${Constants.BaseUrl.PROD}/${NetworkConstants.ARTICLE_ENDPOINT}?id=$id")
+                .let { Json.decodeFromString(Article.serializer(), it) }
+        }
 }
 
 object NetworkConstants {
-    const val ARTICLES_ENDPOINT = "multik/master/articles.json"
+    const val ARTICLES_ENDPOINT = "articles"
+    const val ARTICLE_ENDPOINT = "article"
 }

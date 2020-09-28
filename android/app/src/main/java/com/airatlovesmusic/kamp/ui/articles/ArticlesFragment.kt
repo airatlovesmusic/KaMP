@@ -20,8 +20,7 @@ class ArticlesFragment: BaseFragment(R.layout.fragment_articles) {
     private var binding: FragmentArticlesBinding? = null
 
     private val adapter by lazy {
-        ArticlesAdapter { featureComponent.goToArticle(it.url) }
-        ViewGroup
+        ArticlesAdapter { featureComponent.goToArticle(it.id) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -13,7 +13,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ArticleFeatureComponent(
-    url: String,
+    id: Int,
     private val router: Router? = null
 ): KoinComponent {
 
@@ -24,10 +24,10 @@ class ArticleFeatureComponent(
 
     private val feature = Feature<State, Cmd, Msg, News>(
         initialState = State(),
-        initialMessages = setOf(Msg.GetArticle(url)),
+        initialMessages = setOf(Msg.GetArticle(id)),
         reducer = { msg, state ->
             when (msg) {
-                is Msg.GetArticle -> Update(cmd = Cmd.GetArticle(msg.url), state = state.copy(isLoading = true))
+                is Msg.GetArticle -> Update(cmd = Cmd.GetArticle(msg.id), state = state.copy(isLoading = true))
                 is Msg.GetArticleFailure -> Update.state(state.copy(isLoading = false))
                 is Msg.NewArticle -> Update.state(state.copy(article = msg.article, isLoading = false))
             }
@@ -35,7 +35,7 @@ class ArticleFeatureComponent(
         commandHandler = { cmd ->
             when (cmd) {
                 is Cmd.GetArticle ->
-                    articlesRepository.getArticle(cmd.url)
+                    articlesRepository.getArticle(cmd.id)
                         .subscribeOn(ioScheduler)
                         .observeOn(mainScheduler)
                         .map { SideEffect<Msg, News>(msg = Msg.NewArticle(it)) }
@@ -53,13 +53,13 @@ class ArticleFeatureComponent(
     )
 
     sealed class Msg {
-        data class GetArticle(val url: String): Msg()
+        data class GetArticle(val id: Int): Msg()
         data class NewArticle(val article: Article): Msg()
         data class GetArticleFailure(val throwable: Throwable): Msg()
     }
 
     sealed class Cmd {
-        data class GetArticle(val url: String): Cmd()
+        data class GetArticle(val id: Int): Cmd()
     }
 
     sealed class News {

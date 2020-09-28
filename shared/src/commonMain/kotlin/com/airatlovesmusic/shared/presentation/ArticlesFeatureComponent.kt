@@ -108,8 +108,8 @@ class ArticlesFeatureComponent(
         feature.accept(msg)
     }
 
-    fun goToArticle(url: String) {
-        router?.goTo(screens.article(url))
+    fun goToArticle(id: Int) {
+        router?.goTo(screens.article(id))
     }
 
 }

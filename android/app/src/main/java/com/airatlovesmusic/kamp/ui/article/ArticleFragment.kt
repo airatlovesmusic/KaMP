@@ -13,8 +13,8 @@ import com.airatlovesmusic.shared.presentation.ArticleFeatureComponent.*
 
 class ArticleFragment: BaseFragment(R.layout.fragment_article) {
 
-    private val url by lazy { requireArguments().getString(ARG_URL, "") }
-    private val featureComponent by lazy { ArticleFeatureComponent(url, parentRouter) }
+    private val articleId by lazy { requireArguments().getInt(ARG_ID, 0) }
+    private val featureComponent by lazy { ArticleFeatureComponent(articleId, parentRouter) }
 
     private var binding: FragmentArticleBinding? = null
 
@@ -50,12 +50,12 @@ class ArticleFragment: BaseFragment(R.layout.fragment_article) {
     }
 
     companion object {
-        fun create(url: String) = ArticleFragment().apply {
+        fun create(id: Int) = ArticleFragment().apply {
             arguments = bundleOf(
-                ARG_URL to url
+                ARG_ID to id
             )
         }
-        const val ARG_URL = "url"
+        const val ARG_ID = "id"
     }
 
 }
