@@ -10,7 +10,7 @@ import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 
-object DatabaseFactory {
+object Database {
 
     fun init(){
         Database.connect(hikari())

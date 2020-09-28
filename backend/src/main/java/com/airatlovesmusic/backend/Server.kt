@@ -37,7 +37,7 @@ fun Application.module() {
         anyHost()
     }
 
-    DatabaseFactory.init()
+    Database.init()
 
     install(Routing) {
         article()

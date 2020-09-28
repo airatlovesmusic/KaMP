@@ -1,6 +1,6 @@
 package com.airatlovesmusic.backend.data
 
-import com.airatlovesmusic.backend.DatabaseFactory.dbQuery
+import com.airatlovesmusic.backend.Database.dbQuery
 import com.airatlovesmusic.backend.db.Articles
 import com.airatlovesmusic.model.Article
 import org.jetbrains.exposed.sql.ResultRow
