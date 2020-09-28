@@ -21,6 +21,13 @@ fun Application.module() {
         )
     }
     install(CORS) {
+        method(HttpMethod.Options)
+        method(HttpMethod.Post)
+        method(HttpMethod.Get)
+        method(HttpMethod.Put)
+        method(HttpMethod.Delete)
+        method(HttpMethod.Head)
+
         header("sec-ch-ua")
         header("sec-ch-ua-mobile")
         header("Sec-Fetch-Dest")
