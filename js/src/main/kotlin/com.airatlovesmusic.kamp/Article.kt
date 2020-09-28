@@ -19,7 +19,6 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
         feature = ArticleFeatureComponent(props.id.toString())
         feature.bindListeners(
             stateListener = {
-                println(it)
                 setState {
                     isLoading = it.isLoading
                     article = it.article

@@ -13,25 +13,3 @@ interface NetworkSource {
     fun getArticles(): Single<List<Article>>
     fun getArticle(id: String): Single<Article>
 }
-
-class NetworkSourceImpl: NetworkSource {
-
-    private val httpClient: HttpClient = HttpClient()
-
-    override fun getArticles(): Single<List<Article>> =
-        singleFromCoroutine {
-            httpClient.get<String>("${Constants.BaseUrl.PROD}/${NetworkConstants.ARTICLES_ENDPOINT}")
-                .let { Json.decodeFromString(ListSerializer(Article.serializer()), it) }
-        }
-
-    override fun getArticle(id: String): Single<Article> =
-        singleFromCoroutine {
-            httpClient.get<String>("${Constants.BaseUrl.PROD}/${NetworkConstants.ARTICLE_ENDPOINT}?id=$id")
-                .let { Json.decodeFromString(Article.serializer(), it) }
-        }
-}
-
-object NetworkConstants {
-    const val ARTICLES_ENDPOINT = "articles"
-    const val ARTICLE_ENDPOINT = "article"
-}
