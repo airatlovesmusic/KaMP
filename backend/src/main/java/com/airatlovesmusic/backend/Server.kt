@@ -28,11 +28,12 @@ fun Application.module() {
         method(HttpMethod.Delete)
         method(HttpMethod.Head)
 
-        header("sec-ch-ua")
-        header("sec-ch-ua-mobile")
-        header("Sec-Fetch-Dest")
-        header("Sec-Fetch-Mode")
-        header("Sec-Fetch-Site")
+        header(HttpHeaders.AccessControlAllowHeaders)
+        header(HttpHeaders.ContentType)
+        header(HttpHeaders.AccessControlAllowOrigin)
+        header(HttpHeaders.AccessControlAllowMethods)
+
+        anyHost()
     }
     install(Routing) {
         article()
