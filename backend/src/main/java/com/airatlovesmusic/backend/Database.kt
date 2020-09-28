@@ -23,6 +23,10 @@ object Database {
                     it[title] = "Title #$index"
                 }
             }
+            Users.insert {
+                it[username] = "admin"
+                it[password] = "admin"
+            }
         }
     }
 
