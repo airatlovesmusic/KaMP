@@ -28,3 +28,7 @@ repositories {
 tasks.create("stage") {
     dependsOn(":backend:stage")
 }
+
+tasks.create("jsRun") {
+    dependsOn(":js:browserDevelopmentRun")
+}
