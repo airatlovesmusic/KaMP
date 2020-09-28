@@ -5,7 +5,7 @@ import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.features.*
 import io.ktor.gson.GsonConverter
-import io.ktor.http.ContentType
+import io.ktor.http.*
 import io.ktor.routing.*
 
 fun Application.module() {
@@ -20,7 +20,9 @@ fun Application.module() {
             )
         )
     }
-    install(CORS)
+    install(CORS) {
+        header(HttpHeaders.AccessControlAllowOrigin)
+    }
     install(Routing) {
         article()
     }
