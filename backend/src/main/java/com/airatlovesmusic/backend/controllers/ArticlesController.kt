@@ -18,7 +18,7 @@ fun Routing.article() {
         get {
             call.request.queryParameters["id"]?.toIntOrNull()?.let { id ->
                 val article = repository.getArticle(id)
-                if (article != null) call.respond(article)
+                if (article != null) call.respond(it)
                 else call.respond(HttpStatusCode.NotFound)
             } ?: call.respond(HttpStatusCode.BadRequest)
         }

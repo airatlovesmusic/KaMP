@@ -9,7 +9,7 @@ application {
 }
 
 dependencies {
-    implementation(project(path =":model"))
+    implementation(project(":model"))
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0-RC2")
 
@@ -18,6 +18,7 @@ dependencies {
     implementation ("io.ktor:ktor-server-netty:$ktorVersion")
     implementation ("io.ktor:ktor-gson:$ktorVersion")
     implementation ("io.ktor:ktor-auth:$ktorVersion")
+    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
     // database
     implementation("org.jetbrains.exposed:exposed:0.17.7")
     implementation ("com.h2database:h2:1.4.200")

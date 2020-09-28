@@ -1,9 +1,13 @@
 package com.airatlovesmusic.backend
 
+import com.airatlovesmusic.backend.controllers.JWTConfig
 import com.airatlovesmusic.backend.controllers.article
+import com.airatlovesmusic.backend.data.UsersRepository
 import com.google.gson.GsonBuilder
 import io.ktor.application.Application
 import io.ktor.application.install
+import io.ktor.auth.*
+import io.ktor.auth.jwt.*
 import io.ktor.features.*
 import io.ktor.gson.GsonConverter
 import io.ktor.http.*
@@ -38,6 +42,17 @@ fun Application.module() {
     }
 
     Database.init()
+
+    install(Authentication) {
+        val usersRepository = UsersRepository()
+        jwt {
+            verifier(JWTConfig.verifier)
+            realm = "ktor.io"
+            validate {
+                it.payload.getClaim("id").asInt()?.let(usersRepository::findUserById)
+            }
+        }
+    }
 
     install(Routing) {
         article()
