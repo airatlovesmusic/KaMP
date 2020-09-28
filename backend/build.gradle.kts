@@ -20,8 +20,6 @@ dependencies {
     implementation ("io.ktor:ktor-auth:$ktorVersion")
     // database
     implementation("org.jetbrains.exposed:exposed:0.17.7")
-    implementation ("org.jetbrains.exposed:exposed-jdbc:0.17.7")
-    implementation ("org.jetbrains.exposed:exposed-dao:0.17.7")
 
     implementation ("com.h2database:h2:1.4.200")
     implementation ("com.zaxxer:HikariCP:3.4.2")
