@@ -19,6 +19,7 @@ dependencies {
     implementation ("io.ktor:ktor-gson:$ktorVersion")
     implementation ("io.ktor:ktor-auth:$ktorVersion")
     implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
+    implementation("org.mindrot:jbcrypt:0.4")
     // database
     implementation("org.jetbrains.exposed:exposed:0.17.7")
     implementation ("com.h2database:h2:1.4.200")

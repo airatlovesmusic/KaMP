@@ -1,4 +1,4 @@
-package com.airatlovesmusic.backend
+package com.airatlovesmusic.backend.data
 
 import com.airatlovesmusic.backend.db.Articles
 import com.airatlovesmusic.backend.db.Users
@@ -10,6 +10,7 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.mindrot.jbcrypt.BCrypt
 
 object Database {
 
@@ -25,7 +26,7 @@ object Database {
             }
             Users.insert {
                 it[username] = "admin"
-                it[password] = "admin"
+                it[password] = BCrypt.hashpw("admin", BCrypt.gensalt())
             }
         }
     }

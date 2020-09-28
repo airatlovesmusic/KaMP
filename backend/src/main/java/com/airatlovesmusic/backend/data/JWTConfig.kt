@@ -1,4 +1,4 @@
-package com.airatlovesmusic.backend
+package com.airatlovesmusic.backend.data
 
 import com.airatlovesmusic.backend.entity.User
 import com.auth0.jwt.JWT

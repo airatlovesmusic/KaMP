@@ -1,12 +1,13 @@
-package com.airatlovesmusic.backend.data
+package com.airatlovesmusic.backend.data.repository
 
-import com.airatlovesmusic.backend.Database.dbQuery
+import com.airatlovesmusic.backend.data.Database.dbQuery
 import com.airatlovesmusic.backend.db.Users
 import com.airatlovesmusic.backend.entity.User
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.mindrot.jbcrypt.BCrypt
 
 class UsersRepository {
 
@@ -25,11 +26,13 @@ class UsersRepository {
     }
 
     suspend fun createUser(username: String, password: String): User? = dbQuery {
-        Users.insert {
-            it[Users.username] = username
-            it[Users.password] = password
-        }
-        Users.select { (Users.username eq username) }
+        Users
+            .insert {
+                it[Users.username] = username
+                it[Users.password] = BCrypt.hashpw(password, BCrypt.gensalt())
+            }
+        Users
+            .select { (Users.username eq username) }
             .mapNotNull { toUser(it) }
             .singleOrNull()
     }
