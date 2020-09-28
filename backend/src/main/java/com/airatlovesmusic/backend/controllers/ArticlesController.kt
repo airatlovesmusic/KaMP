@@ -1,7 +1,6 @@
 package com.airatlovesmusic.backend.controllers
 
 import com.airatlovesmusic.backend.data.ArticlesRepository
-import com.airatlovesmusic.model.Article
 import io.ktor.application.call
 import io.ktor.http.*
 import io.ktor.response.respond

@@ -3,7 +3,6 @@ package com.airatlovesmusic.backend.data
 import com.airatlovesmusic.backend.DatabaseFactory.dbQuery
 import com.airatlovesmusic.backend.db.Articles
 import com.airatlovesmusic.model.Article
-import com.airatlovesmusic.backend.db.toArticle
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
