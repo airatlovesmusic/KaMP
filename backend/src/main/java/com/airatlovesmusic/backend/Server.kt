@@ -1,5 +1,6 @@
 package com.airatlovesmusic.backend
 
+import com.airatlovesmusic.backend.controllers.article
 import com.google.gson.GsonBuilder
 import io.ktor.application.Application
 import io.ktor.application.install
@@ -35,6 +36,9 @@ fun Application.module() {
 
         anyHost()
     }
+
+    DatabaseFactory.init()
+
     install(Routing) {
         article()
     }
