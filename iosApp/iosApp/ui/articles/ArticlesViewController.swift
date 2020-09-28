@@ -71,7 +71,7 @@ class ArticlesViewController: BaseViewController {
 extension ArticlesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        featureComponent?.goToArticle(url: adapter?.getArticle(indexPath).url ?? "")
+        featureComponent?.goToArticle(id: adapter?.getArticle(indexPath).id.description ?? "")
     }
 
 }

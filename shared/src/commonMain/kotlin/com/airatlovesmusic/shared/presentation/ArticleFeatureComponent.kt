@@ -13,7 +13,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ArticleFeatureComponent(
-    id: Int,
+    id: String,
     private val router: Router? = null
 ): KoinComponent {
 
@@ -53,13 +53,13 @@ class ArticleFeatureComponent(
     )
 
     sealed class Msg {
-        data class GetArticle(val id: Int): Msg()
+        data class GetArticle(val id: String): Msg()
         data class NewArticle(val article: Article): Msg()
         data class GetArticleFailure(val throwable: Throwable): Msg()
     }
 
     sealed class Cmd {
-        data class GetArticle(val id: Int): Cmd()
+        data class GetArticle(val id: String): Cmd()
     }
 
     sealed class News {

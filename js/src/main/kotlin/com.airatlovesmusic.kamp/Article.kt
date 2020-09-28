@@ -16,7 +16,7 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
     }
 
     override fun componentDidMount() {
-        feature = ArticleFeatureComponent(props.url)
+        feature = ArticleFeatureComponent(props.id.toString())
         feature.bindListeners(
             stateListener = {
                 println(it)
@@ -53,7 +53,7 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
     }
 
     interface ArticleProps : RProps {
-        var url: String
+        var id: Int
     }
 
     data class ArticleState(
@@ -64,6 +64,6 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
 
 }
 
-fun RBuilder.article(url: String) = child(Article::class) {
-    attrs.url = url
+fun RBuilder.article(id: Int) = child(Article::class) {
+    attrs.id = id
 }

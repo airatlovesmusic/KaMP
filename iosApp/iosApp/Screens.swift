@@ -13,7 +13,7 @@ class ScreensImpl: Screens {
     func articles() -> Screen {
         return ArticlesScreen()
     }
-    func article(url: String) -> Screen {
-        return ArticleScreen(url: url)
+    func article(id: String) -> Screen {
+        return ArticleScreen(id: id)
     }
 }

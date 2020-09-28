@@ -46,7 +46,7 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
     private fun RDOMBuilder<DIV>.renderList() {
         state.list?.let {
             it.forEach { article ->
-                navLink(to = "/article/${article.url}") {
+                navLink(to = "/article/${article.id}") {
                     h2(classes = "title") {
                         +article.title
                     }

@@ -4,5 +4,5 @@ expect abstract class Screen
 
 interface Screens {
     fun articles(): Screen
-    fun article(id: Int): Screen
+    fun article(id: String): Screen
 }

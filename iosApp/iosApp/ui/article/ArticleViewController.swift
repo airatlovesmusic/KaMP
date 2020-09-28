@@ -12,14 +12,14 @@ import shared
 
 class ArticleScreen: Screen {
     
-    let url: String
+    let id: String
     
-    init(url: String) {
-        self.url = url
+    init(id: String) {
+        self.id = id
     }
     
     override func getViewController() -> UIViewController {
-        return ArticleViewController(url: url)
+        return ArticleViewController(id: id)
     }
     
 }
@@ -29,10 +29,10 @@ class ArticleViewController: BaseViewController {
     private let articleView = ArticleView()
     private var featureComponent: ArticleFeatureComponent?
     
-    init(url: String) {
+    init(id: String) {
         super.init(nibName: nil, bundle: nil)
         featureComponent = ArticleFeatureComponent(
-            url: url,
+            id: id,
             router: navigationController != nil ? Router(navigationController: navigationController!) : nil
         )
     }

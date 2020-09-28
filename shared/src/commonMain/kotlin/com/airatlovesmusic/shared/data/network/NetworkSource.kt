@@ -11,7 +11,7 @@ import kotlinx.serialization.json.Json
 
 interface NetworkSource {
     fun getArticles(): Single<List<Article>>
-    fun getArticle(id: Int): Single<Article>
+    fun getArticle(id: String): Single<Article>
 }
 
 class NetworkSourceImpl: NetworkSource {
@@ -24,7 +24,7 @@ class NetworkSourceImpl: NetworkSource {
                 .let { Json.decodeFromString(ListSerializer(Article.serializer()), it) }
         }
 
-    override fun getArticle(id: Int): Single<Article> =
+    override fun getArticle(id: String): Single<Article> =
         singleFromCoroutine {
             httpClient.get<String>("${Constants.BaseUrl.PROD}/${NetworkConstants.ARTICLE_ENDPOINT}?id=$id")
                 .let { Json.decodeFromString(Article.serializer(), it) }

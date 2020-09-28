@@ -13,7 +13,7 @@ import com.airatlovesmusic.shared.presentation.ArticleFeatureComponent.*
 
 class ArticleFragment: BaseFragment(R.layout.fragment_article) {
 
-    private val articleId by lazy { requireArguments().getInt(ARG_ID, 0) }
+    private val articleId by lazy { requireArguments().getString(ARG_ID, "") }
     private val featureComponent by lazy { ArticleFeatureComponent(articleId, parentRouter) }
 
     private var binding: FragmentArticleBinding? = null
@@ -50,7 +50,7 @@ class ArticleFragment: BaseFragment(R.layout.fragment_article) {
     }
 
     companion object {
-        fun create(id: Int) = ArticleFragment().apply {
+        fun create(id: String) = ArticleFragment().apply {
             arguments = bundleOf(
                 ARG_ID to id
             )

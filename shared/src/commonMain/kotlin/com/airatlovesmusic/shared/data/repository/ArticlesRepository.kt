@@ -9,6 +9,6 @@ class ArticlesRepository(private val networkSource: NetworkSource) {
     fun getArticles(): Single<List<Article>> =
         networkSource.getArticles()
 
-    fun getArticle(id: Int): Single<Article> =
+    fun getArticle(id: String): Single<Article> =
         networkSource.getArticle(id)
 }
