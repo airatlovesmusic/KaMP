@@ -1,4 +1,4 @@
-package com.airatlovesmusic.backend.db
+package com.airatlovesmusic.backend.db.tables
 
 import org.jetbrains.exposed.sql.Table
 

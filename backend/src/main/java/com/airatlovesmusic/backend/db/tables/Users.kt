@@ -1,4 +1,4 @@
-package com.airatlovesmusic.backend.db
+package com.airatlovesmusic.backend.db.tables
 
 import org.jetbrains.exposed.sql.Table
 
@@ -7,8 +7,3 @@ object Users: Table() {
     val username = varchar("name", 100)
     val password = varchar("password", 100)
 }
-
-data class NewUser(
-    val username: String,
-    val password: String
-)

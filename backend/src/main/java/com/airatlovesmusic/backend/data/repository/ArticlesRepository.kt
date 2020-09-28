@@ -1,8 +1,8 @@
 package com.airatlovesmusic.backend.data.repository
 
 import com.airatlovesmusic.backend.data.Database.dbQuery
-import com.airatlovesmusic.backend.db.Articles
-import com.airatlovesmusic.model.Article
+import com.airatlovesmusic.backend.db.tables.Articles
+import com.airatlovesmusic.backend.entity.Article
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll

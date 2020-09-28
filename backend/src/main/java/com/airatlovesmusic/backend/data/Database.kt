@@ -1,7 +1,7 @@
 package com.airatlovesmusic.backend.data
 
-import com.airatlovesmusic.backend.db.Articles
-import com.airatlovesmusic.backend.db.Users
+import com.airatlovesmusic.backend.db.tables.Articles
+import com.airatlovesmusic.backend.db.tables.Users
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers

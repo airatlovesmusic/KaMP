@@ -6,7 +6,7 @@ import io.ktor.http.*
 import io.ktor.response.respond
 import io.ktor.routing.*
 
-fun Routing.article() {
+fun Route.article() {
     val repository = ArticlesRepository()
     route("/articles", HttpMethod.Get) {
         get {

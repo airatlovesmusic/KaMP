@@ -1,7 +1,7 @@
 package com.airatlovesmusic.backend.data.repository
 
 import com.airatlovesmusic.backend.data.Database.dbQuery
-import com.airatlovesmusic.backend.db.Users
+import com.airatlovesmusic.backend.db.tables.Users
 import com.airatlovesmusic.backend.entity.User
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
