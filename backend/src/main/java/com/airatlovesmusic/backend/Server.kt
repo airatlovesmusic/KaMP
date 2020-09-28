@@ -1,6 +1,5 @@
 package com.airatlovesmusic.backend
 
-import com.airatlovesmusic.backend.controllers.JWTConfig
 import com.airatlovesmusic.backend.controllers.article
 import com.airatlovesmusic.backend.data.UsersRepository
 import com.google.gson.GsonBuilder
