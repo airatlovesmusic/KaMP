@@ -21,7 +21,11 @@ fun Application.module() {
         )
     }
     install(CORS) {
-        header(HttpHeaders.AccessControlAllowOrigin)
+        header("sec-ch-ua")
+        header("sec-ch-ua-mobile")
+        header("Sec-Fetch-Dest")
+        header("Sec-Fetch-Mode")
+        header("Sec-Fetch-Site")
     }
     install(Routing) {
         article()
