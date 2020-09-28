@@ -1,6 +1,7 @@
 package com.airatlovesmusic.backend
 
 import com.airatlovesmusic.backend.db.Articles
+import com.airatlovesmusic.backend.db.Users
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ object Database {
     fun init(){
         Database.connect(hikari())
         transaction {
-            create(Articles)
+            create(Articles, Users)
             (0..10).map { index ->
                 Articles.insert {
                     it[id] = index
