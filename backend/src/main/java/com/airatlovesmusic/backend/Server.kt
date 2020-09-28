@@ -1,6 +1,7 @@
 package com.airatlovesmusic.backend
 
 import com.airatlovesmusic.backend.controllers.article
+import com.airatlovesmusic.backend.controllers.auth
 import com.airatlovesmusic.backend.data.UsersRepository
 import com.google.gson.GsonBuilder
 import io.ktor.application.Application
@@ -55,5 +56,6 @@ fun Application.module() {
 
     install(Routing) {
         article()
+        auth()
     }
 }
