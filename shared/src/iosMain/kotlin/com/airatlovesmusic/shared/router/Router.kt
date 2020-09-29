@@ -3,7 +3,8 @@ package com.airatlovesmusic.shared.router
 import platform.UIKit.UINavigationController
 
 actual open class Router constructor(
-    private val navigationController: UINavigationController
+    private val navigationController: UINavigationController,
+    private val parentRouter: Router? = null
 ) {
 
     actual open fun goTo(screen: Screen) {
@@ -15,6 +16,14 @@ actual open class Router constructor(
 
     actual open fun goBack() {
         navigationController.popViewControllerAnimated(true)
+    }
+
+    actual open fun finishFlow() {
+        parentRouter?.goBack()
+    }
+
+    actual open fun startFlow(screen: Screen) {
+        parentRouter?.goTo(screen)
     }
 
 }

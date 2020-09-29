@@ -15,7 +15,7 @@ abstract class BaseFlowFragment: BaseFragment(R.layout.layout_container) {
     abstract val launchScreen: Screen
 
     val router: Router by lazy {
-        Router(childFragmentManager, R.id.container)
+        Router(childFragmentManager, R.id.container, parentRouter)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

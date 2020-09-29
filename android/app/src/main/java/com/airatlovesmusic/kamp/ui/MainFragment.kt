@@ -8,7 +8,6 @@ class MainFragment : BaseFlowFragment() {
 
     private val screens by inject<Screens>()
 
-    override val launchScreen =
-        screens.articles()
+    override val launchScreen = screens.articles()
 
 }
