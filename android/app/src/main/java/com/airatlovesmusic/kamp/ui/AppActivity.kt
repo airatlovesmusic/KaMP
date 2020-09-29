@@ -13,7 +13,7 @@ class AppActivity: BaseActivity() {
 
     override val launchScreen: Screen
         get() =
-            if (authRepository.isAuthorized()) screens.main()
+            if (authRepository.isAuthorized()) screens.mainFlow()
             else screens.authFlow()
 
 }

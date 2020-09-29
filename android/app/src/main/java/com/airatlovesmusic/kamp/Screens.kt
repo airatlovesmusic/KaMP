@@ -10,7 +10,7 @@ import com.airatlovesmusic.shared.router.Screen
 import com.airatlovesmusic.shared.router.Screens
 
 class ScreensImpl: Screens {
-    override fun main() = object: Screen() {
+    override fun mainFlow() = object: Screen() {
         override fun getFragment() = MainFragment()
     }
     override fun articles() = object : Screen() {

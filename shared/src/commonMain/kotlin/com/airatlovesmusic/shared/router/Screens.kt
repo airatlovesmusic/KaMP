@@ -3,7 +3,7 @@ package com.airatlovesmusic.shared.router
 expect abstract class Screen
 
 interface Screens {
-    fun main(): Screen
+    fun mainFlow(): Screen
     fun articles(): Screen
     fun article(id: String): Screen
 
