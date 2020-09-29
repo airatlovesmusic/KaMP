@@ -30,7 +30,7 @@ class NetworkSourceImpl(
             level = LogLevel.INFO
         }
         defaultRequest {
-            header("Authorization", preferences.getString(Constants.PreferencesKeys.KEY_TOKEN))
+            header("Authorization", "Bearer " + preferences.getString(Constants.PreferencesKeys.KEY_TOKEN))
         }
     }
 
