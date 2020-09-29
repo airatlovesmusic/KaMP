@@ -29,7 +29,7 @@ class ArticlesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        featureComponent = ArticlesFeatureComponent(router: router)
+        featureComponent = ArticlesFeatureComponent(router: parentRouter)
         setUpTableView()
     }
     

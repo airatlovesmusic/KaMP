@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import shared
 
 class AppLauncher {
     
@@ -25,7 +26,11 @@ class AppLauncher {
     }
 
     func launchMainScreen() {
-        let controller = UINavigationController(rootViewController: ArticlesViewController())
+        // todo
+        let token = UserDefaults(suiteName: "app")?.string(forKey: "token")
+        let controller = token != nil ?
+            UINavigationController(rootViewController: MainFlowViewController()) :
+            UINavigationController(rootViewController: MainFlowViewController())
         setRootViewController(controller: controller, animatedWithOptions: nil)
     }
 

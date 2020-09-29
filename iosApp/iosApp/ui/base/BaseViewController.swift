@@ -14,7 +14,7 @@ import shared
 class BaseViewController: UIViewController {
     
     private let baseView = BaseView()
-    var router: Router?
+    var parentRouter: Router?
     
     var customView: UIView {
         return UIView()
@@ -22,7 +22,11 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        router = navigationController != nil ? Router(navigationController: navigationController!) : nil
+        parentRouter = navigationController != nil ?
+            Router(
+                navigationController: navigationController!,
+                parentRouter: (parent as? BaseFlowViewController)?.router
+            ) : nil
     }
     
     func makeDefaultConstraints(in viewController: UIViewController) {}
@@ -33,9 +37,9 @@ class BaseViewController: UIViewController {
         baseView.makeDefaultConstraints(in: self)
         baseView.contentView.addSubview(customView)
         customView.backgroundColor = .white
-        customView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+//        customView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
     }
     
 }

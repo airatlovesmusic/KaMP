@@ -33,7 +33,7 @@ class ArticleViewController: BaseViewController {
         super.init(nibName: nil, bundle: nil)
         featureComponent = ArticleFeatureComponent(
             id: id,
-            router: navigationController != nil ? Router(navigationController: navigationController!) : nil
+            router: parentRouter
         )
     }
     

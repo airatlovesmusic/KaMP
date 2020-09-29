@@ -19,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         // DI
-        KoinKt.doInitKoin(screens: ScreensImpl())
+        KoinKt.doInitKoin(
+            screens: ScreensImpl(),
+            preferences: Preferences()
+        )
         
         appLauncher.launchMainScreen()
         return true
