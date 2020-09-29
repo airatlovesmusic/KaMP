@@ -13,8 +13,6 @@ import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.Json
 import org.koin.core.KoinComponent
 
 class NetworkSourceImpl(
@@ -27,7 +25,7 @@ class NetworkSourceImpl(
         }
         install(Logging) {
             logger = Logger.DEFAULT
-            level = LogLevel.INFO
+            level = LogLevel.BODY
         }
         defaultRequest {
             header("Authorization", "Bearer " + preferences.getString(Constants.PreferencesKeys.KEY_TOKEN))
@@ -36,14 +34,12 @@ class NetworkSourceImpl(
 
     override fun getArticles(): Single<List<Article>> =
         singleFromCoroutine {
-            httpClient.get<String>("${Constants.BaseUrl.PROD}/${ARTICLES_ENDPOINT}")
-                .let { Json.decodeFromString(ListSerializer(Article.serializer()), it) }
+            httpClient.get("${Constants.BaseUrl.PROD}/${ARTICLES_ENDPOINT}")
         }
 
     override fun getArticle(id: String): Single<Article> =
         singleFromCoroutine {
-            httpClient.get<String>("${Constants.BaseUrl.PROD}/${ARTICLE_ENDPOINT}?id=$id")
-                .let { Json.decodeFromString(Article.serializer(), it) }
+            httpClient.get("${Constants.BaseUrl.PROD}/${ARTICLE_ENDPOINT}?id=$id")
         }
 
     override fun login(username: String, password: String): Single<String> =
