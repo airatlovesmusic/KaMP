@@ -58,9 +58,9 @@ fun Application.module() {
 
     install(Routing) {
         auth()
-        article()
         authenticate {
             // add controllers, which need authorization
+            article()
         }
     }
 }
