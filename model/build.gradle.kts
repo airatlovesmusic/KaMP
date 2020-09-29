@@ -12,16 +12,10 @@ repositories {
 
 kotlin {
     jvm()
-    ios {
-        binaries {
-            framework {
-                baseName = "model"
-            }
-        }
-    }
+    ios()
     js { browser() }
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
             }

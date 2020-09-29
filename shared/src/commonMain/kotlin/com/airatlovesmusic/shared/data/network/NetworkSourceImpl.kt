@@ -1,6 +1,7 @@
 package com.airatlovesmusic.shared.data.network
 
 import com.airatlovesmusic.model.Article
+import com.airatlovesmusic.model.request.LoginRegisterRequest
 import com.airatlovesmusic.shared.Constants
 import com.airatlovesmusic.shared.data.preferences.Preferences
 import com.badoo.reaktive.coroutinesinterop.singleFromCoroutine
@@ -66,7 +67,3 @@ class NetworkSourceImpl(
         private const val REGISTER_ENDPOINT = "register"
     }
 }
-
-// TODO move to model module
-@Serializable
-data class LoginRegisterRequest(val username: String, val password: String)
