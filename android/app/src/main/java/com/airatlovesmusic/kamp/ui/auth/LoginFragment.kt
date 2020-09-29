@@ -15,7 +15,7 @@ class LoginFragment: BaseFragment(R.layout.fragment_login) {
 
     private val screens by inject<Screens>()
     private val featureComponent by lazy { LoginFeatureComponent() }
-    private var binding: FragmentLoginBinding? = null
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,16 +28,20 @@ class LoginFragment: BaseFragment(R.layout.fragment_login) {
     }
 
     override fun onDestroyView() {
-        binding = null
         featureComponent.dispose()
         super.onDestroyView()
     }
 
     private fun setOnClickListeners() {
-        binding?.btnLogin?.setOnClickListener {
-            parentRouter.startFlow(screens.articles())
+        binding.btnLogin.setOnClickListener {
+            featureComponent.dispatch(
+                LoginFeatureComponent.Msg.Login(
+                    username = binding.etUsername.text.toString(),
+                    password = binding.etPassword.text.toString()
+                )
+            )
         }
-        binding?.btnRegister?.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             parentRouter.goTo(screens.register())
         }
     }
@@ -54,7 +58,7 @@ class LoginFragment: BaseFragment(R.layout.fragment_login) {
     }
 
     private fun renderState(state: LoginFeatureComponent.State) {
-        binding?.pbLoading?.isVisible = state.isLoading
+        binding.pbLoading.isVisible = state.isLoading
     }
 
 }
