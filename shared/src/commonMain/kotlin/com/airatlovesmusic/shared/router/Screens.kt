@@ -5,5 +5,7 @@ expect abstract class Screen
 interface Screens {
     fun articles(): Screen
     fun article(id: String): Screen
+
     fun login(): Screen
+    fun authFlow(): Screen
 }

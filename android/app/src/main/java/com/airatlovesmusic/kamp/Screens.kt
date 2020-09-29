@@ -15,7 +15,7 @@ class ScreensImpl: Screens {
     override fun article(id: String) = object: Screen() {
         override fun getFragment() = ArticleFragment.create(id)
     }
-    fun authFlow() = object : Screen() {
+    override fun authFlow() = object : Screen() {
         override fun getFragment() = AuthFlowFragment()
     }
     override fun login() = object : Screen() {

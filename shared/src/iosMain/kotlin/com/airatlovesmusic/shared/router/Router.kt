@@ -22,4 +22,8 @@ actual open class Router constructor(
         parentRouter?.goBack()
     }
 
+    actual open fun startFlow(screen: Screen) {
+        parentRouter?.goTo(screen)
+    }
+
 }

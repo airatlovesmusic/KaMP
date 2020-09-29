@@ -11,4 +11,7 @@ actual open class Router() {
 
     actual open fun finishFlow() {
     }
+
+    actual open fun startFlow(screen: Screen) {
+    }
 }

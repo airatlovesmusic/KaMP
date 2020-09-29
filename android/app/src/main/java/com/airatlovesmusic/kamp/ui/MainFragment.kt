@@ -12,6 +12,6 @@ class MainFragment : BaseFlowFragment() {
 
     override val launchScreen =
         if (authRepository.isAuthorized()) screens.articles()
-        else screens.login()
+        else screens.authFlow()
 
 }
