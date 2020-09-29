@@ -6,6 +6,7 @@ interface Screens {
     fun articles(): Screen
     fun article(id: String): Screen
 
-    fun login(): Screen
     fun authFlow(): Screen
+    fun login(): Screen
+    fun register(): Screen
 }

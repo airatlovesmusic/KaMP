@@ -24,12 +24,22 @@ class LoginFragment: BaseFragment(R.layout.fragment_login) {
             stateListener = ::renderState,
             newsListener = ::handleNews
         )
+        setOnClickListeners()
     }
 
     override fun onDestroyView() {
         binding = null
         featureComponent.dispose()
         super.onDestroyView()
+    }
+
+    private fun setOnClickListeners() {
+        binding?.btnLogin?.setOnClickListener {
+            parentRouter.startFlow(screens.articles())
+        }
+        binding?.btnRegister?.setOnClickListener {
+            parentRouter.goTo(screens.register())
+        }
     }
 
     private fun handleNews(news: LoginFeatureComponent.News) {

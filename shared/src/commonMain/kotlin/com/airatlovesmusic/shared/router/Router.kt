@@ -5,3 +5,4 @@ expect open class Router {
     open fun goBack()
     open fun finishFlow()
     open fun startFlow(screen: Screen)
+}
