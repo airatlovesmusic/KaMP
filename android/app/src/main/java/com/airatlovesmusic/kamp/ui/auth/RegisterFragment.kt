@@ -50,6 +50,10 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         }
     }
 
+    override fun onBackPressed() {
+        parentRouter.goBack()
+    }
+
     private fun renderState(state: RegisterFeatureComponent.State) {
         binding.pbLoading.isVisible = state.isLoading
     }

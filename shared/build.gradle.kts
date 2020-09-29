@@ -54,6 +54,10 @@ kotlin {
                 implementation("com.badoo.reaktive:utils:1.1.17")
                 implementation("com.badoo.reaktive:coroutines-interop:1.1.17")
                 implementation("io.ktor:ktor-client-core:1.4.0")
+                implementation("io.ktor:ktor-client-json:1.4.0")
+                implementation("io.ktor:ktor-client-serialization:1.4.0")
+                implementation("io.ktor:ktor-client-logging:1.4.0")
+                implementation("ch.qos.logback:logback-classic:1.2.3")
                 api("org.koin:koin-core:3.0.1-alpha-2")
                 api(project(":model"))
             }

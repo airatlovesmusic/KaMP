@@ -36,8 +36,12 @@ class LoginFeatureComponent: KoinComponent {
                         .asObservable()
             }
         },
-        stateListener = { stateListener.invoke(it) },
-        newsListener = { newsListener.invoke(it) }
+        stateListener = {
+            println(it)
+            stateListener.invoke(it) },
+        newsListener = {
+            println(it)
+            newsListener.invoke(it) }
     )
 
     data class State(

@@ -10,7 +10,7 @@ import org.koin.core.KoinComponent
 abstract class BaseActivity: AppCompatActivity(), KoinComponent {
 
     private val currentFragment
-        get() = supportFragmentManager.findFragmentById(R.id.content) as? BaseFragment
+        get() = supportFragmentManager.findFragmentById(R.id.container) as? BaseFragment
 
     abstract val launchScreen: Screen
 

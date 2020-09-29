@@ -14,16 +14,16 @@ fun initKoin(
     preferences: Preferences
 ) = startKoin {
     modules(
-        multiPlatformModule,
         module {
             single { screens }
             single { preferences }
-        }
+        },
+        multiPlatformModule
     )
 }
 
 val multiPlatformModule = module {
-    single<NetworkSource> { NetworkSourceImpl() }
+    single<NetworkSource> { NetworkSourceImpl(get()) }
     single { ArticlesRepository(get()) }
     single { AuthRepository(get(), get()) }
 }

@@ -1,5 +1,6 @@
 package com.airatlovesmusic.kamp.ui
 
+import android.os.Bundle
 import com.airatlovesmusic.shared.base.BaseActivity
 import com.airatlovesmusic.shared.data.repository.AuthRepository
 import com.airatlovesmusic.shared.router.Screen

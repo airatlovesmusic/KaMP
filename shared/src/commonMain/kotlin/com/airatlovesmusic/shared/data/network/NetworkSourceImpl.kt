@@ -2,18 +2,37 @@ package com.airatlovesmusic.shared.data.network
 
 import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.Constants
-import com.badoo.reaktive.completable.Completable
-import com.badoo.reaktive.coroutinesinterop.completableFromCoroutine
+import com.airatlovesmusic.shared.data.preferences.Preferences
 import com.badoo.reaktive.coroutinesinterop.singleFromCoroutine
 import com.badoo.reaktive.single.Single
 import io.ktor.client.*
+import io.ktor.client.features.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
+import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
+import io.ktor.http.*
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
+import org.koin.core.KoinComponent
 
-class NetworkSourceImpl: NetworkSource {
+class NetworkSourceImpl(
+    preferences: Preferences
+): NetworkSource, KoinComponent {
 
-    private val httpClient: HttpClient = HttpClient()
+    private val httpClient: HttpClient = HttpClient() {
+        install(JsonFeature) {
+            serializer = KotlinxSerializer()
+        }
+        install(Logging) {
+            logger = Logger.DEFAULT
+            level = LogLevel.INFO
+        }
+        defaultRequest {
+            header("Authorization", preferences.getString(Constants.PreferencesKeys.KEY_TOKEN))
+        }
+    }
 
     override fun getArticles(): Single<List<Article>> =
         singleFromCoroutine {
@@ -29,7 +48,8 @@ class NetworkSourceImpl: NetworkSource {
 
     override fun login(username: String, password: String): Single<String> =
         singleFromCoroutine {
-            httpClient.post("${Constants.BaseUrl.PROD}/${ARTICLE_ENDPOINT}") {
+            httpClient.post("${Constants.BaseUrl.PROD}/${LOGIN_ENDPOINT}") {
+                contentType(ContentType.Application.Json)
                 body = LoginRegisterRequest(username, password)
             }
         }
@@ -37,6 +57,7 @@ class NetworkSourceImpl: NetworkSource {
     override fun register(username: String, password: String): Single<String> =
         singleFromCoroutine {
             httpClient.post("${Constants.BaseUrl.PROD}/${REGISTER_ENDPOINT}") {
+                contentType(ContentType.Application.Json)
                 body = LoginRegisterRequest(username, password)
             }
         }
@@ -51,4 +72,5 @@ class NetworkSourceImpl: NetworkSource {
 }
 
 // TODO move to model module
+@Serializable
 data class LoginRegisterRequest(val username: String, val password: String)

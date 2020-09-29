@@ -17,7 +17,7 @@ actual open class Router constructor(
     }
 
     actual open fun goBack() {
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        fragmentManager.popBackStack()
     }
 
     actual open fun finishFlow() {

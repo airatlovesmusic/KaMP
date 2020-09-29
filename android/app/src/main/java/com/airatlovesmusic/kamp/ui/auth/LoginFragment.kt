@@ -27,9 +27,9 @@ class LoginFragment: BaseFragment(R.layout.fragment_login) {
         setOnClickListeners()
     }
 
-    override fun onDestroyView() {
+    override fun onDestroy() {
+        super.onDestroy()
         featureComponent.dispose()
-        super.onDestroyView()
     }
 
     private fun setOnClickListeners() {
