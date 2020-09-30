@@ -1,5 +1,6 @@
 package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components
 
+import com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components.base.BaseComponent
 import com.airatlovesmusic.shared.presentation.ArticleFeatureComponent
 import react.*
 import react.dom.div
@@ -8,8 +9,12 @@ import react.dom.span
 import com.airatlovesmusic.model.Article as ArticleModel
 
 class Article(
-    props: ArticleProps
-): BaseComponent<Article.ArticleProps, Article.ArticleState>(props) {
+    private val id: String
+): BaseComponent<Article.ArticleProps, Article.ArticleState>(
+    object : ArticleProps {
+        override var id: Int = id.toIntOrNull() ?: 0
+    }
+) {
 
     private lateinit var feature: ArticleFeatureComponent
 

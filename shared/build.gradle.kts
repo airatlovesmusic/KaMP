@@ -11,6 +11,8 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
+    maven("https://plugins.gradle.org/m2/")
     maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
     maven(url = "https://dl.bintray.com/badoo/maven")
 }
@@ -80,6 +82,10 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-js"))
                 implementation("io.ktor:ktor-client-js:1.4.0")
+
+                // react dependencies
+                implementation(npm("react", "16.13.1"))
+                implementation("org.jetbrains:kotlin-react:16.13.0-pre.94-kotlin-1.3.70")
             }
         }
     }

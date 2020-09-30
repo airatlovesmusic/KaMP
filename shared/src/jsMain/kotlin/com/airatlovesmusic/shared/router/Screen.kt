@@ -1,3 +1,7 @@
 package com.airatlovesmusic.shared.router
 
-actual abstract class Screen
+import react.RComponent
+
+actual abstract class Screen {
+    abstract fun getComponent(): RComponent<*, *>
+}

@@ -1,5 +1,6 @@
 package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components
 
+import com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components.base.BaseComponent
 import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.presentation.ArticlesFeatureComponent
 import kotlinx.html.DIV

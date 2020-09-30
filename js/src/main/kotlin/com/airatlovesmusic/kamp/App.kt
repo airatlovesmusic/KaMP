@@ -13,7 +13,6 @@ import react.router.dom.switch
 fun RBuilder.app(koin: Koin) =
     browserRouter {
         val isAuthorized = koin.get<AuthRepository>().isAuthorized()
-        println(isAuthorized)
         switch {
             route("/", exact = isAuthorized) {
                 child(Articles::class) {}
