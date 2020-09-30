@@ -1,4 +1,4 @@
-package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp
+package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components
 
 import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.presentation.ArticlesFeatureComponent
@@ -7,7 +7,7 @@ import react.*
 import react.dom.*
 import react.router.dom.navLink
 
-class Articles : RComponent<RProps, Articles.ArticlesState>() {
+class Articles : BaseComponent<RProps, Articles.ArticlesState>(object : RProps {}) {
 
     private lateinit var feature: ArticlesFeatureComponent
 
@@ -22,12 +22,14 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
                 setState {
                     isLoading = state.isLoading
                     list = state.articles
-                    hasFailure = false
                 }
             },
-            newsListener = {
+            newsListener = { news ->
                 setState {
-                    hasFailure = true
+                    when (news) {
+                        is ArticlesFeatureComponent.News.GetArticlesFailure ->
+                            showError(news.error)
+                    }
                 }
             }
         )
@@ -59,13 +61,11 @@ class Articles : RComponent<RProps, Articles.ArticlesState>() {
         div(classes = "container") {
             renderProgress()
             renderList()
-            error(state.hasFailure)
         }
     }
 
     data class ArticlesState(
         var list: List<Article>? = null,
         var isLoading: Boolean = false,
-        var hasFailure: Boolean = false
     ): RState
 }

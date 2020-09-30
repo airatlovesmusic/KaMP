@@ -2,7 +2,7 @@ package com.airatlovesmusic.shared.data.preferences
 
 import kotlinx.browser.localStorage
 
-actual class Preferences() {
+actual class Preferences {
 
     actual fun getString(key: String): String? =
         localStorage.getItem(key)

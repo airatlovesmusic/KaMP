@@ -1,4 +1,4 @@
-package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp
+package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components
 
 import com.airatlovesmusic.shared.presentation.ArticleFeatureComponent
 import react.*
@@ -7,7 +7,9 @@ import react.dom.h6
 import react.dom.span
 import com.airatlovesmusic.model.Article as ArticleModel
 
-class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
+class Article(
+    props: ArticleProps
+): BaseComponent<Article.ArticleProps, Article.ArticleState>(props) {
 
     private lateinit var feature: ArticleFeatureComponent
 
@@ -22,15 +24,13 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
                 setState {
                     isLoading = it.isLoading
                     article = it.article
-                    hasFailure = false
                 }
             },
-            newsListener = {
-                when (it) {
-                    is ArticleFeatureComponent.News.GetArticleFailure ->
-                        setState {
-                            hasFailure = true
-                        }
+            newsListener = { news ->
+                when (news) {
+                    is ArticleFeatureComponent.News.GetArticleFailure -> showError(
+                        news.throwable.message ?: "Unknown"
+                    )
                 }
             }
         )
@@ -39,7 +39,6 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
     override fun RBuilder.render() {
         div("container") {
             renderTitle()
-            error(state.hasFailure)
         }
     }
 
@@ -57,8 +56,7 @@ class Article: RComponent<Article.ArticleProps, Article.ArticleState>() {
 
     data class ArticleState(
         var isLoading: Boolean = false,
-        var article: ArticleModel? = null,
-        var hasFailure: Boolean = false
+        var article: ArticleModel? = null
     ): RState
 
 }
