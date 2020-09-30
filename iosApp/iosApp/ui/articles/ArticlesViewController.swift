@@ -41,7 +41,7 @@ class ArticlesViewController: BaseViewController {
             },
             newsListener: { (news: ArticlesFeatureComponent.News) in
                 switch news {
-                case is ArticlesFeatureComponent.NewsGetArticlesFailure: print("Error")
+                    case is ArticlesFeatureComponent.NewsGetArticlesFailure: print("Error")
                     default: print("news - " + news.description)
                 }
             }
