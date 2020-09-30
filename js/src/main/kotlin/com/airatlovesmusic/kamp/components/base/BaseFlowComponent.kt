@@ -2,9 +2,11 @@ package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components.base
 
 import com.airatlovesmusic.shared.router.Router
 import com.airatlovesmusic.shared.router.Screen
-import kotlinext.js.asJsObject
-import kotlinext.js.jsObject
-import react.*
+import kotlinx.browser.document
+import react.RBuilder
+import react.RProps
+import react.RState
+import react.setState
 
 class BaseFlowComponent(
     private val launchScreen: Screen
@@ -23,7 +25,9 @@ class BaseFlowComponent(
     }
 
     override fun RBuilder.render() {
-        child(state.currentScreen.getComponent().asJsObject() as RClass<*>())
+        react.dom.render(document.getElementById("root")) {
+            state.currentScreen.getComponent(router)
+        }
     }
 
 }

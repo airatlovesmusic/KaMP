@@ -3,12 +3,18 @@ package com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components
 import com.airatlovesmusic.kamp.com.airatlovesmusic.kamp.components.base.BaseComponent
 import com.airatlovesmusic.model.Article
 import com.airatlovesmusic.shared.presentation.ArticlesFeatureComponent
+import com.airatlovesmusic.shared.router.Router
 import kotlinx.html.DIV
 import react.*
 import react.dom.*
 import react.router.dom.navLink
 
-class Articles : BaseComponent<RProps, Articles.ArticlesState>(object : RProps {}) {
+class Articles(
+    parentRouter: Router
+): BaseComponent<RProps, Articles.ArticlesState>(
+    props = object : RProps {},
+    parentRouter = parentRouter
+) {
 
     private lateinit var feature: ArticlesFeatureComponent
 
@@ -17,7 +23,7 @@ class Articles : BaseComponent<RProps, Articles.ArticlesState>(object : RProps {
     }
 
     override fun componentDidMount() {
-        feature = ArticlesFeatureComponent()
+        feature = ArticlesFeatureComponent(parentRouter)
         feature.bindListeners(
             stateListener = { state ->
                 setState {

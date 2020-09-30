@@ -3,5 +3,5 @@ package com.airatlovesmusic.shared.router
 import react.RComponent
 
 actual abstract class Screen {
-    abstract fun getComponent(): RComponent<*, *>
+    abstract fun getComponent(parentRouter: Router): RComponent<*, *>
 }

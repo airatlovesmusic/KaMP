@@ -9,7 +9,7 @@ import react.RState
 
 abstract class BaseComponent<Props : RProps, State : RState>(
     props: Props,
-    parentRouter: Router? = null
+    protected val parentRouter: Router? = null
 ) : RComponent<Props, State>(props) {
 
     override fun RBuilder.render() {}
