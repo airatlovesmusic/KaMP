@@ -29,7 +29,9 @@ class NetworkSourceImpl(
             level = LogLevel.BODY
         }
         defaultRequest {
-            header("Authorization", "Bearer " + preferences.getString(Constants.PreferencesKeys.KEY_TOKEN))
+            preferences.getString(Constants.PreferencesKeys.KEY_TOKEN)?.let {
+                header("Authorization", "Bearer $it")
+            }
         }
     }
 

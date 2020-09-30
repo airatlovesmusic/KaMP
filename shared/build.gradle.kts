@@ -72,7 +72,7 @@ kotlin {
         }
         val iosMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-cio:1.4.0")
+                implementation("io.ktor:ktor-client-ios:1.4.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt") { isForce = true }
             }
         }
