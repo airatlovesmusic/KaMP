@@ -15,6 +15,6 @@ actual class Preferences(
     actual fun getString(key: String) =
         sharedPreferences.getString(key, null)
 
-    actual fun setString(key: String, value: String) =
+    actual fun setString(key: String, value: String?) =
         sharedPreferences.edit { putString(key, value) }
 }

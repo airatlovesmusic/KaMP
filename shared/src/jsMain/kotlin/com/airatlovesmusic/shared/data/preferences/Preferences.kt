@@ -1,14 +1,14 @@
 package com.airatlovesmusic.shared.data.preferences
 
-// TODO
-actual class Preferences {
+import kotlinx.browser.localStorage
 
-    actual fun getString(key: String): String? {
-        TODO("Not yet implemented")
-    }
+actual class Preferences() {
 
-    actual fun setString(key: String, value: String) {
+    actual fun getString(key: String): String? =
+        localStorage.getItem(key)
 
-    }
+    actual fun setString(key: String, value: String?) =
+        if (value != null) localStorage.setItem(key, value)
+        else localStorage.removeItem(key)
 
 }

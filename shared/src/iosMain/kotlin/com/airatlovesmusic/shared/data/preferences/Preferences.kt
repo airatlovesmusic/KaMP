@@ -9,7 +9,7 @@ actual class Preferences {
     actual fun getString(key: String) =
         userDefault.stringForKey(key)
 
-    actual fun setString(key: String, value: String) =
+    actual fun setString(key: String, value: String?) =
         userDefault.setObject(value, key)
 
 }
