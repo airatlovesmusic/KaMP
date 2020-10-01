@@ -1,6 +1,7 @@
 package com.airatlovesmusic.backend.data
 
 import com.airatlovesmusic.backend.db.tables.Articles
+import com.airatlovesmusic.backend.db.tables.Prescriptions
 import com.airatlovesmusic.backend.db.tables.Users
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -9,8 +10,10 @@ import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.mindrot.jbcrypt.BCrypt
+import java.util.*
 
 object Database {
 
@@ -18,6 +21,7 @@ object Database {
         Database.connect(hikari())
         transaction {
             create(Articles, Users)
+            // Fill the database
             (0..10).map { index ->
                 Articles.insert {
                     it[id] = index
@@ -27,6 +31,15 @@ object Database {
             Users.insert {
                 it[username] = "admin"
                 it[password] = BCrypt.hashpw("admin", BCrypt.gensalt())
+            }
+            Users.selectAll().toList().forEach {
+                val userId = it[Users.id]
+                Prescriptions.insert {
+                    it[Prescriptions.userId] = userId
+                    it[name] = "test"
+                    it[createdAt] = Date().time
+                    it[schedule] = ""
+                }
             }
         }
     }
