@@ -2,6 +2,7 @@ package com.airatlovesmusic.backend
 
 import com.airatlovesmusic.backend.controllers.article
 import com.airatlovesmusic.backend.controllers.auth
+import com.airatlovesmusic.backend.controllers.prescriptions
 import com.airatlovesmusic.backend.data.Database
 import com.airatlovesmusic.backend.data.JWTConfig
 import com.airatlovesmusic.backend.data.repository.UsersRepository
@@ -60,6 +61,7 @@ fun Application.module() {
         auth()
         authenticate {
             // add controllers, which need authorization
+            prescriptions()
             article()
         }
     }
