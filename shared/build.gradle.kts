@@ -49,13 +49,13 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+                implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0")
                 implementation("com.badoo.reaktive:reaktive:1.1.17")
                 implementation("com.badoo.reaktive:utils:1.1.17")
                 implementation("com.badoo.reaktive:coroutines-interop:1.1.17")
-                implementation("io.ktor:ktor-client-core:1.4.0")
-                implementation("io.ktor:ktor-client-json:1.4.0")
-                implementation("io.ktor:ktor-client-serialization:1.4.0")
+                implementation("io.ktor:ktor-client-core:1.4.1")
+                implementation("io.ktor:ktor-client-json:1.4.1")
+                implementation("io.ktor:ktor-client-serialization:1.4.1")
                 implementation("io.ktor:ktor-client-logging:1.4.0")
                 implementation("ch.qos.logback:logback-classic:1.2.3")
                 api("org.koin:koin-core:3.0.1-alpha-2")
@@ -65,7 +65,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation("androidx.core:core-ktx:1.3.1")
+                implementation("androidx.core:core-ktx:1.3.2")
                 implementation("androidx.appcompat:appcompat:1.2.0")
                 implementation("io.ktor:ktor-client-okhttp:1.4.0")
             }
@@ -90,13 +90,6 @@ android {
     defaultConfig {
         minSdkVersion(24)
         targetSdkVersion(29)
-        versionCode = 1
-        versionName = "1.0"
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
     }
 }
 
