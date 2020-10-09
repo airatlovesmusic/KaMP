@@ -50,10 +50,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0")
+                implementation(Dependencies.ktorClient.common)
                 implementation("com.badoo.reaktive:reaktive:1.1.17")
                 implementation("com.badoo.reaktive:utils:1.1.17")
                 implementation("com.badoo.reaktive:coroutines-interop:1.1.17")
-                implementation("io.ktor:ktor-client-core:1.4.1")
                 implementation("io.ktor:ktor-client-json:1.4.1")
                 implementation("io.ktor:ktor-client-serialization:1.4.1")
                 implementation("io.ktor:ktor-client-logging:1.4.0")
@@ -64,22 +64,20 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
                 implementation("androidx.core:core-ktx:1.3.2")
                 implementation("androidx.appcompat:appcompat:1.2.0")
-                implementation("io.ktor:ktor-client-okhttp:1.4.0")
+                implementation(Dependencies.ktorClient.android)
             }
         }
         val iosMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-ios:1.4.0")
+                implementation(Dependencies.ktorClient.iOS)
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt") { isForce = true }
             }
         }
         val jsMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-js"))
-                implementation("io.ktor:ktor-client-js:1.4.0")
+                implementation(Dependencies.ktorClient.js)
             }
         }
     }
