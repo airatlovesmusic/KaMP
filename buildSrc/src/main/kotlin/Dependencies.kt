@@ -1,11 +1,11 @@
-data class MultiplatformDependency(
-    val android: String,
-    val common: String,
-    val iOS: String,
-    val js: String
-)
-
 object Dependencies {
+
+    data class MultiplatformDependency(
+        val android: String,
+        val common: String,
+        val iOS: String,
+        val js: String
+    )
 
     val ktorClient = MultiplatformDependency(
         android = "io.ktor:ktor-client-okhttp:${Versions.ktorVersion}",
