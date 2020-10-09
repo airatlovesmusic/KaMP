@@ -5,5 +5,4 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="go_to_login">Go to login</string>
-    <string name="prescriptions">Prescriptions</string>
 </resources>
