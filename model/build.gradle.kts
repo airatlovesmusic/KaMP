@@ -17,7 +17,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation ("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0")
+                implementation (Dependencies.Common.Serialization)
             }
         }
         all {
