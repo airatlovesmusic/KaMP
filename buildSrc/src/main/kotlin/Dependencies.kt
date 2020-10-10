@@ -45,4 +45,25 @@ object Dependencies {
         val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt"
     }
 
+    object Backend {
+        const val SerializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.Serialization}"
+        const val Logback = "ch.qos.logback:logback-classic:${Versions.Logback}"
+
+        object Ktor {
+            const val Netty = "io.ktor:ktor-server-netty:${Versions.ktorVersion}"
+            const val Auth = "io.ktor:ktor-auth:${Versions.ktorVersion}"
+            const val AuthJwt = "io.ktor:ktor-auth-jwt:${Versions.ktorVersion}"
+            const val Gson = "io.ktor:ktor-gson:${Versions.ktorVersion}"
+        }
+
+        const val JBCrypt = "org.mindrot:jbcrypt:0.4"
+
+        object Database {
+            const val Exposed = "org.jetbrains.exposed:exposed:0.17.7"
+            const val H2 = "com.h2database:h2:1.4.200"
+            const val Hikari = "com.zaxxer:HikariCP:3.4.2"
+        }
+
+    }
+
 }

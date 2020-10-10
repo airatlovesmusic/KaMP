@@ -9,21 +9,21 @@ application {
 }
 
 dependencies {
-    implementation(project(":model"))
+    implementation(project(Modules.Model))
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
 
-    val ktorVersion = "1.4.0"
-    implementation("ch.qos.logback:logback-classic:1.2.3")
-    implementation ("io.ktor:ktor-server-netty:$ktorVersion")
-    implementation ("io.ktor:ktor-gson:$ktorVersion")
-    implementation ("io.ktor:ktor-auth:$ktorVersion")
-    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
-    implementation("org.mindrot:jbcrypt:0.4")
-    // database
-    implementation("org.jetbrains.exposed:exposed:0.17.7")
-    implementation ("com.h2database:h2:1.4.200")
-    implementation ("com.zaxxer:HikariCP:3.4.2")
+    implementation(Dependencies.Backend.SerializationJson)
+    implementation(Dependencies.Backend.Logback)
+    implementation(Dependencies.Backend.JBCrypt)
+
+    implementation(Dependencies.Backend.Ktor.Auth)
+    implementation(Dependencies.Backend.Ktor.AuthJwt)
+    implementation(Dependencies.Backend.Ktor.Gson)
+    implementation(Dependencies.Backend.Ktor.Netty)
+
+    implementation(Dependencies.Backend.Database.Exposed)
+    implementation(Dependencies.Backend.Database.H2)
+    implementation(Dependencies.Backend.Database.Hikari)
 }
 
 tasks {
