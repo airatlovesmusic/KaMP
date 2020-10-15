@@ -20,13 +20,6 @@ kotlin {
                 implementation (Dependencies.Common.Serialization)
             }
         }
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlin.ExperimentalStdlibApi")
-                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                useExperimentalAnnotation("kotlinx.coroutines.FlowPreview")
-                useExperimentalAnnotation("kotlinx.coroutines.InternalCoroutinesApi")
-            }
-        }
+        applyUseExperimentalAnnotations()
     }
 }

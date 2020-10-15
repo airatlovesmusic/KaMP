@@ -8,10 +8,10 @@ object Dependencies {
     )
 
     val ktorClient = MultiplatformDependency(
-        android = "io.ktor:ktor-client-okhttp:${Versions.ktorVersion}",
-        common = "io.ktor:ktor-client-core:${Versions.ktorVersion}",
-        iOS = "io.ktor:ktor-client-ios:${Versions.ktorVersion}",
-        js = "io.ktor:ktor-client-js:${Versions.ktorVersion}"
+        android = "io.ktor:ktor-client-okhttp:${Versions.Ktor}",
+        common = "io.ktor:ktor-client-core:${Versions.Ktor}",
+        iOS = "io.ktor:ktor-client-ios:${Versions.Ktor}",
+        js = "io.ktor:ktor-client-js:${Versions.Ktor}"
     )
 
     object Common {
@@ -23,9 +23,9 @@ object Dependencies {
         }
 
         object Ktor {
-            const val Json = "io.ktor:ktor-client-json:${Versions.ktorVersion}"
-            const val Serialization = "io.ktor:ktor-client-serialization:${Versions.ktorVersion}"
-            const val Logging = "io.ktor:ktor-client-logging:${Versions.ktorVersion}"
+            const val Json = "io.ktor:ktor-client-json:${Versions.Ktor}"
+            const val Serialization = "io.ktor:ktor-client-serialization:${Versions.Ktor}"
+            const val Logging = "io.ktor:ktor-client-logging:${Versions.Ktor}"
         }
 
         const val Logback = "ch.qos.logback:logback-classic:${Versions.Logback}"
@@ -42,7 +42,7 @@ object Dependencies {
     }
 
     object iOS {
-        val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt"
+        const val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9-native-mt"
     }
 
     object Backend {
@@ -50,10 +50,10 @@ object Dependencies {
         const val Logback = "ch.qos.logback:logback-classic:${Versions.Logback}"
 
         object Ktor {
-            const val Netty = "io.ktor:ktor-server-netty:${Versions.ktorVersion}"
-            const val Auth = "io.ktor:ktor-auth:${Versions.ktorVersion}"
-            const val AuthJwt = "io.ktor:ktor-auth-jwt:${Versions.ktorVersion}"
-            const val Gson = "io.ktor:ktor-gson:${Versions.ktorVersion}"
+            const val Netty = "io.ktor:ktor-server-netty:${Versions.KtorBackend}"
+            const val Auth = "io.ktor:ktor-auth:${Versions.KtorBackend}"
+            const val AuthJwt = "io.ktor:ktor-auth-jwt:${Versions.KtorBackend}"
+            const val Gson = "io.ktor:ktor-gson:${Versions.KtorBackend}"
         }
 
         const val JBCrypt = "org.mindrot:jbcrypt:0.4"

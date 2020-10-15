@@ -38,15 +38,7 @@ kotlin {
     }
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlin.RequiresOptIn")
-                useExperimentalAnnotation("kotlin.ExperimentalStdlibApi")
-                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                useExperimentalAnnotation("kotlinx.coroutines.FlowPreview")
-                useExperimentalAnnotation("kotlinx.coroutines.InternalCoroutinesApi")
-            }
-        }
+        applyUseExperimentalAnnotations()
         val commonMain by getting {
             dependencies {
                 implementation (Dependencies.Common.Serialization)

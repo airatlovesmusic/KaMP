@@ -6,9 +6,10 @@ pluginManagement {
         mavenCentral()
     }
 }
-include(Modules.Model)
-include(Modules.Shared)
-include(Modules.Backend)
-include(Modules.Android)
-include(Modules.Js)
+
+include(":model")
+include(":shared")
+include(":backend")
+include(":android:app")
+include(":js")
 rootProject.name = "KaMP"
