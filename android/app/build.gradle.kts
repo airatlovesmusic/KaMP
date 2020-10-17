@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(Android.compileSdkVerion)
     defaultConfig {
         applicationId("com.airatlovesmusic.kamp")
-        targetSdkVersion(30)
-        minSdkVersion(24)
+        targetSdkVersion(Android.targetSdkVerion)
+        minSdkVersion(Android.minSdkVerion)
         versionCode = 1
         versionName = "1.0"
     }
